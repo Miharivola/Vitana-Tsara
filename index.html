@@ -3,270 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boss Bet Pro - Aviator & CosmosX</title>
+    <title>Mandroka Vola - Studio Edition</title>
     <style>
         :root {
-            --bg-light: #f4f4f4;
-            --text-dark: #333;
-            --aviator-red: #d32f2f;
-            --cosmos-orange: #f39c12;
-            --card-bg: #ffffff;
-            --input-bg: #e0e0e0;
+            --aviator: #d32f2f;
+            --cosmos: #f39c12;
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --input-bg: #e8eaed;
         }
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; display: flex; justify-content: center; }
+        .app { width: 100%; max-width: 450px; min-height: 100vh; padding-bottom: 80px; position: relative; }
 
-        .app-container {
-            width: 100%;
-            max-width: 450px;
-            min-height: 100vh;
-            padding-bottom: 80px;
-        }
+        /* Navigation ambony */
+        .tabs { display: flex; background: white; padding: 10px; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .tab { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; background: #eee; }
+        .tab.active-aviator { background: var(--aviator); color: white; }
+        .tab.active-cosmos { background: var(--cosmos); color: white; }
 
-        /* --- MENU SELECTION --- */
-        .menu-selection {
-            display: flex;
-            gap: 10px;
-            padding: 20px;
-            background: white;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+        /* Formulaires */
+        .container { padding: 20px; }
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+        .title-studio { font-weight: 800; text-transform: uppercase; margin-bottom: 15px; font-size: 1.1rem; }
+        
+        .field { text-align: left; margin-bottom: 15px; }
+        .label { font-size: 0.75rem; font-weight: bold; color: #666; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .input { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--input-bg); font-size: 1.2rem; font-family: monospace; box-sizing: border-box; text-align: center; }
 
-        .menu-btn {
-            flex: 1;
-            padding: 15px;
-            border-radius: 12px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            background: #eee;
-        }
+        .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; margin-top: 10px; text-transform: uppercase; }
+        .btn-aviator { background: linear-gradient(45deg, #b71c1c, #d32f2f); }
+        .btn-cosmos { background: linear-gradient(45deg, #d32f2f, #27ae60); }
 
-        .btn-aviator.active { background: var(--aviator-red); color: white; }
-        .btn-cosmos.active { background: var(--cosmos-orange); color: white; }
+        /* Valiny CosmosX (Araka ny sary) */
+        .res-card { background: white; margin-top: 20px; border-radius: 20px; padding: 20px; display: none; border-top: 5px solid; }
+        .status-tour { font-weight: 900; font-size: 1.4rem; margin-bottom: 10px; }
+        .time-big { font-size: 2.5rem; font-weight: 900; color: #27ae60; margin: 10px 0; font-family: monospace; }
+        
+        .grid-gain { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .box-gain { background: #f8f9fa; padding: 15px; border-radius: 15px; border: 1px solid #eee; }
+        .g-label { font-size: 0.65rem; font-weight: bold; color: #888; text-transform: uppercase; display: block; }
+        .g-val { font-size: 1.3rem; font-weight: 900; }
 
-        /* --- INPUT CARD --- */
-        .main-card {
-            background: white;
-            margin: 15px;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
+        .consigne { background: #fff5f5; padding: 15px; border-radius: 15px; margin-top: 15px; font-size: 0.85rem; border: 1px solid #ffe3e3; }
 
-        .studio-title {
-            margin-bottom: 20px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .input-box {
-            background: var(--input-bg);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: none;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 1.2rem;
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            color: #555;
-        }
-
-        .calc-btn {
-            width: 100%;
-            padding: 18px;
-            border-radius: 12 - 20px;
-            border: none;
-            color: white;
-            font-weight: 900;
-            font-size: 1.1rem;
-            cursor: pointer;
-            background: linear-gradient(to right, #e74c3c, #27ae60);
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
-
-        /* --- RESULT SECTION --- */
-        .indicator-card {
-            background: #f9f9f9;
-            margin: 15px;
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #eee;
-            display: none;
-        }
-
-        .status-header {
-            font-weight: 900;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-        }
-
-        .heure-predite {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #27ae60;
-            margin: 10px 0;
-        }
-
-        .gain-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .gain-box {
-            background: #eee;
-            padding: 15px;
-            border-radius: 12px;
-        }
-
-        .gain-label { font-size: 0.7rem; color: #777; font-weight: bold; text-transform: uppercase; }
-        .gain-val { font-size: 1.2rem; font-weight: 900; display: block; }
-
-        .consigne {
-            background: #fff0f0;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #d32f2f;
-            border: 1px solid #ffcccc;
-        }
-
-        /* Nav Bottom */
-        nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            max-width: 450px;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 0;
-            border-top: 1px solid #ddd;
-        }
+        /* Floating Clock */
+        .f-clock { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 8px; font-family: monospace; font-weight: bold; font-size: 0.9rem; z-index: 100; border: 1px solid #555; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <div class="menu-selection">
-        <button id="menu-aviator" class="menu-btn btn-aviator active" onclick="switchStudio('aviator')">✈️ AVIATOR</button>
-        <button id="menu-cosmos" class="menu-btn btn-cosmos" onclick="switchStudio('cosmos')">🚀 COSMOS X</button>
+<div class="app">
+    <div class="f-clock" id="live-clock">00:00:00</div>
+
+    <div class="tabs">
+        <button id="tab-av" class="tab active-aviator" onclick="switchMode('aviator')">✈️ AVIATOR</button>
+        <button id="tab-co" class="tab" onclick="switchMode('cosmos')">🚀 COSMOS X</button>
     </div>
 
-    <div class="main-card">
-        <h2 id="studio-name" class="studio-title" style="color: var(--aviator-red);">AVIATOR STUDIO</h2>
-        
-        <label style="font-size: 0.7rem; font-weight: bold; color: #888;">🕒 HEURE DU DÉPART</label>
-        <input type="text" id="input-time" class="input-box" placeholder="HH : MM">
-        
-        <label style="font-size: 0.7rem; font-weight: bold; color: #888;">🎯 MULTIPLICATEUR CIBLE (+2.00)</label>
-        <input type="number" id="input-cote" class="input-box" placeholder="2.00">
-
-        <button class="calc-btn" onclick="generatePrediction()">🔮 CALCULER</button>
-    </div>
-
-    <div id="result-area" class="indicator-card">
-        <div style="font-size: 0.7rem; font-weight: bold; color: #999;">🚀 INDICATEUR DES TOURS</div>
-        <div id="tour-status" class="status-header">TOUR TSARA ✈️</div>
-        
-        <div style="font-size: 0.7rem; font-weight: bold; color: #888; margin-top: 10px;">✋ Heure prédite</div>
-        <div id="res-time" class="heure-predite">00:00:00</div>
-
-        <div class="gain-grid">
-            <div class="gain-box">
-                <span class="gain-label">💸 Petit Gain</span>
-                <span id="res-petit" class="gain-val" style="color: #27ae60;">x0.00</span>
+    <div class="container">
+        <div id="view-aviator" class="card">
+            <div class="title-studio" style="color: var(--aviator);">✈️ Aviator Studio</div>
+            <div class="field">
+                <span class="label">🕒 Heure du départ</span>
+                <input type="text" id="av-time" class="input" placeholder="HH : MM">
             </div>
-            <div class="gain-box">
-                <span class="gain-label">💰 Gros Gain</span>
-                <span id="res-gros" class="gain-val" style="color: #d32f2f;">x0.00</span>
+            <div class="field">
+                <span class="label">🎯 Multiplicateur Cible</span>
+                <input type="number" id="av-cote" class="input" placeholder="2.00">
             </div>
+            <button class="btn-calc btn-aviator" onclick="calcAviator()">Calculer Analytics</button>
         </div>
 
-        <div class="consigne">
-            📋 CONSIGNE DU TOUR<br>
-            <span style="font-weight: bold;">🔵 Miser après 1 bleu avant l'heure prédite</span>
+        <div id="view-cosmos" class="card" style="display: none;">
+            <div class="title-studio" style="color: var(--cosmos);">🚀 CosmosX Studio</div>
+            <div class="field">
+                <span class="label">🎰 Tour (6 chiffres)</span>
+                <input type="number" id="co-tour" class="input" placeholder="063291">
+            </div>
+            <div class="field">
+                <span class="label">🕒 Heure Exacte</span>
+                <input type="text" id="co-time" class="input" placeholder="04:02:21">
+            </div>
+            <div class="field">
+                <span class="label">🎯 Multiplicateur (+2.00)</span>
+                <input type="number" id="co-cote" class="input" placeholder="2.71">
+            </div>
+            <button class="btn-calc btn-cosmos" onclick="calcCosmos()">Prédiction Cosmos X</button>
+        </div>
+
+        <div id="res-area" class="res-card">
+            <div style="font-size: 0.7rem; font-weight: bold; color: #999; margin-bottom: 5px;">🚀 INDICATEUR DES TOURS</div>
+            <div id="res-status" class="status-tour">TOUR TSARA ✈️</div>
+            
+            <div style="font-size: 0.7rem; font-weight: bold; color: #888;">✋ Heure prédite</div>
+            <div id="res-time-val" class="time-big">00:00:00</div>
+
+            <div id="extra-cosmos" style="display:none; margin-bottom: 15px;">
+                <div class="grid-gain" style="margin-bottom: 10px;">
+                    <div class="box-gain"><span class="g-label">🎰 Tour</span><span id="c-tour-1" class="g-val" style="color:#27ae60">---</span></div>
+                    <div class="box-gain"><span class="g-label">🎰 Tour</span><span id="c-tour-2" class="g-val" style="color:#27ae60">---</span></div>
+                </div>
+            </div>
+
+            <div class="grid-gain">
+                <div class="box-gain">
+                    <span class="g-label">💸 Petit Gain</span>
+                    <span id="res-petit" class="g-val" style="color: #27ae60;">x0.00</span>
+                </div>
+                <div class="box-gain">
+                    <span class="g-label">💰 Gros Gain</span>
+                    <span id="res-gros" class="g-val" style="color: #d32f2f;">x0.00</span>
+                </div>
+            </div>
+
+            <div class="consigne">
+                <span style="color: #666; font-weight: bold;">📋 CONSIGNE DU TOUR</span><br>
+                <div id="res-consigne" style="margin-top:5px; color: #2c3e50;">
+                    <span style="color: #3498db;">●</span> Miser après 1 bleu avant l'heure prédite
+                </div>
+            </div>
         </div>
     </div>
-
-    <nav>
-        <span>🏠</span>
-        <span>📜</span>
-        <span>⚙️</span>
-    </nav>
 </div>
 
 <script>
-    let currentStudio = 'aviator';
+    let mode = 'aviator';
 
-    function switchStudio(type) {
-        currentStudio = type;
-        document.getElementById('menu-aviator').classList.toggle('active', type === 'aviator');
-        document.getElementById('menu-cosmos').classList.toggle('active', type === 'cosmos');
-        
-        const title = document.getElementById('studio-name');
-        if(type === 'aviator') {
-            title.innerText = "AVIATOR STUDIO";
-            title.style.color = "var(--aviator-red)";
-        } else {
-            title.innerText = "COSMOSX STUDIO";
-            title.style.color = "var(--cosmos-orange)";
-        }
-        document.getElementById('result-area').style.display = 'none';
+    // Update Live Clock
+    setInterval(() => {
+        const n = new Date();
+        document.getElementById('live-clock').innerText = n.getHours().toString().padStart(2,'0')+":"+n.getMinutes().toString().padStart(2,'0')+":"+n.getSeconds().toString().padStart(2,'0');
+    }, 1000);
+
+    function switchMode(m) {
+        mode = m;
+        document.getElementById('view-aviator').style.display = m === 'aviator' ? 'block' : 'none';
+        document.getElementById('view-cosmos').style.display = m === 'cosmos' ? 'block' : 'none';
+        document.getElementById('tab-av').className = m === 'aviator' ? 'tab active-aviator' : 'tab';
+        document.getElementById('tab-co').className = m === 'cosmos' ? 'tab active-cosmos' : 'tab';
+        document.getElementById('res-area').style.display = 'none';
     }
 
-    function generatePrediction() {
-        const timeInput = document.getElementById('input-time').value;
-        const coteInput = document.getElementById('input-cote').value;
+    function calcAviator() {
+        const t = document.getElementById('av-time').value;
+        if(!t) return alert("Fenoy ny lera!");
+        showResult('aviator');
+    }
 
-        if(!timeInput) return alert("Ampidiro ny lera!");
+    function calcCosmos() {
+        const tour = document.getElementById('co-tour').value;
+        if(!tour) return alert("Ampidiro ny Tour!");
+        showResult('cosmos');
+    }
 
-        // Algorithm fakan-tahaka
-        const now = new Date();
+    function showResult(type) {
+        const area = document.getElementById('res-area');
+        const extra = document.getElementById('extra-cosmos');
+        area.style.display = 'block';
+        area.style.borderTopColor = type === 'aviator' ? '#d32f2f' : '#27ae60';
+
         const rand = Math.random();
+        const now = new Date();
+        now.setMinutes(now.getMinutes() + 2);
         
-        const h = now.getHours().toString().padStart(2, '0');
-        const m = (now.getMinutes() + 2).toString().padStart(2, '0');
-        const s = Math.floor(Math.random() * 60).toString().padStart(2, '0');
-
-        document.getElementById('res-time').innerText = `${h}:${m}:${s}`;
+        document.getElementById('res-time-val').innerText = now.getHours().toString().padStart(2,'0')+":"+now.getMinutes().toString().padStart(2,'0')+":"+Math.floor(Math.random()*60).toString().padStart(2,'0');
         
-        const baseCote = parseFloat(coteInput) || 2.00;
-        document.getElementById('res-petit').innerText = "x" + (baseCote * (1.2 + rand)).toFixed(2);
-        document.getElementById('res-gros').innerText = "x" + (baseCote * (5 + rand * 10)).toFixed(2);
-
-        const status = document.getElementById('tour-status');
-        if(rand > 0.3) {
-            status.innerText = currentStudio === 'aviator' ? "TOUR TSARA ✈️" : "TOUR TSARA 🚀";
-            status.style.color = "#27ae60";
+        if(type === 'cosmos') {
+            extra.style.display = 'block';
+            const tourBase = parseInt(document.getElementById('co-tour').value) || 63300;
+            document.getElementById('c-tour-1').innerText = tourBase + 14;
+            document.getElementById('c-tour-2').innerText = tourBase + 15;
+            document.getElementById('res-status').innerHTML = "TOUR TSARA 🚀";
+            document.getElementById('res-status').style.color = "#27ae60";
+            document.getElementById('res-petit').innerText = "x" + (5 + rand * 2).toFixed(2);
+            document.getElementById('res-gros').innerText = "x" + (15 + rand * 10).toFixed(2);
         } else {
-            status.innerText = "TOUR RATSY 💔";
-            status.style.color = "#d32f2f";
+            extra.style.display = 'none';
+            document.getElementById('res-status').innerHTML = rand > 0.3 ? "TOUR TSARA ✈️" : "TOUR RATSY 💔";
+            document.getElementById('res-status').style.color = rand > 0.3 ? "#27ae60" : "#d32f2f";
+            document.getElementById('res-petit').innerText = "x" + (1.5 + rand).toFixed(2);
+            document.getElementById('res-gros').innerText = "x" + (3 + rand * 5).toFixed(2);
         }
-
-        document.getElementById('result-area').style.display = 'block';
     }
 </script>
 
