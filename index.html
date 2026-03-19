@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Bet Pro - Aviator & CosmosX</title>
+    <style>
+        :root {
+            --bg-light: #f4f4f4;
+            --text-dark: #333;
+            --aviator-red: #d32f2f;
+            --cosmos-orange: #f39c12;
+            --card-bg: #ffffff;
+            --input-bg: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* --- MENU SELECTION --- */
+        .menu-selection {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            background: white;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .menu-btn {
+            flex: 1;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            background: #eee;
+        }
+
+        .btn-aviator.active { background: var(--aviator-red); color: white; }
+        .btn-cosmos.active { background: var(--cosmos-orange); color: white; }
+
+        /* --- INPUT CARD --- */
+        .main-card {
+            background: white;
+            margin: 15px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .studio-title {
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-box {
+            background: var(--input-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            color: #555;
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 12 - 20px;
+            border: none;
+            color: white;
+            font-weight: 900;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #e74c3c, #27ae60);
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* --- RESULT SECTION --- */
+        .indicator-card {
+            background: #f9f9f9;
+            margin: 15px;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #eee;
+            display: none;
+        }
+
+        .status-header {
+            font-weight: 900;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .heure-predite {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #27ae60;
+            margin: 10px 0;
+        }
+
+        .gain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .gain-box {
+            background: #eee;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .gain-label { font-size: 0.7rem; color: #777; font-weight: bold; text-transform: uppercase; }
+        .gain-val { font-size: 1.2rem; font-weight: 900; display: block; }
+
+        .consigne {
+            background: #fff0f0;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #d32f2f;
+            border: 1px solid #ffcccc;
+        }
+
+        /* Nav Bottom */
+        nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="menu-selection">
+        <button id="menu-aviator" class="menu-btn btn-aviator active" onclick="switchStudio('aviator')">✈️ AVIATOR</button>
+        <button id="menu-cosmos" class="menu-btn btn-cosmos" onclick="switchStudio('cosmos')">🚀 COSMOS X</button>
+    </div>
+
+    <div class="main-card">
+        <h2 id="studio-name" class="studio-title" style="color: var(--aviator-red);">AVIATOR STUDIO</h2>
+        
+        <label style="font-size: 0.7rem; font-weight: bold; color: #888;">🕒 HEURE DU DÉPART</label>
+        <input type="text" id="input-time" class="input-box" placeholder="HH : MM">
+        
+        <label style="font-size: 0.7rem; font-weight: bold; color: #888;">🎯 MULTIPLICATEUR CIBLE (+2.00)</label>
+        <input type="number" id="input-cote" class="input-box" placeholder="2.00">
+
+        <button class="calc-btn" onclick="generatePrediction()">🔮 CALCULER</button>
+    </div>
+
+    <div id="result-area" class="indicator-card">
+        <div style="font-size: 0.7rem; font-weight: bold; color: #999;">🚀 INDICATEUR DES TOURS</div>
+        <div id="tour-status" class="status-header">TOUR TSARA ✈️</div>
+        
+        <div style="font-size: 0.7rem; font-weight: bold; color: #888; margin-top: 10px;">✋ Heure prédite</div>
+        <div id="res-time" class="heure-predite">00:00:00</div>
+
+        <div class="gain-grid">
+            <div class="gain-box">
+                <span class="gain-label">💸 Petit Gain</span>
+                <span id="res-petit" class="gain-val" style="color: #27ae60;">x0.00</span>
+            </div>
+            <div class="gain-box">
+                <span class="gain-label">💰 Gros Gain</span>
+                <span id="res-gros" class="gain-val" style="color: #d32f2f;">x0.00</span>
+            </div>
+        </div>
+
+        <div class="consigne">
+            📋 CONSIGNE DU TOUR<br>
+            <span style="font-weight: bold;">🔵 Miser après 1 bleu avant l'heure prédite</span>
+        </div>
+    </div>
+
+    <nav>
+        <span>🏠</span>
+        <span>📜</span>
+        <span>⚙️</span>
+    </nav>
+</div>
+
+<script>
+    let currentStudio = 'aviator';
+
+    function switchStudio(type) {
+        currentStudio = type;
+        document.getElementById('menu-aviator').classList.toggle('active', type === 'aviator');
+        document.getElementById('menu-cosmos').classList.toggle('active', type === 'cosmos');
+        
+        const title = document.getElementById('studio-name');
+        if(type === 'aviator') {
+            title.innerText = "AVIATOR STUDIO";
+            title.style.color = "var(--aviator-red)";
+        } else {
+            title.innerText = "COSMOSX STUDIO";
+            title.style.color = "var(--cosmos-orange)";
+        }
+        document.getElementById('result-area').style.display = 'none';
+    }
+
+    function generatePrediction() {
+        const timeInput = document.getElementById('input-time').value;
+        const coteInput = document.getElementById('input-cote').value;
+
+        if(!timeInput) return alert("Ampidiro ny lera!");
+
+        // Algorithm fakan-tahaka
+        const now = new Date();
+        const rand = Math.random();
+        
+        const h = now.getHours().toString().padStart(2, '0');
+        const m = (now.getMinutes() + 2).toString().padStart(2, '0');
+        const s = Math.floor(Math.random() * 60).toString().padStart(2, '0');
+
+        document.getElementById('res-time').innerText = `${h}:${m}:${s}`;
+        
+        const baseCote = parseFloat(coteInput) || 2.00;
+        document.getElementById('res-petit').innerText = "x" + (baseCote * (1.2 + rand)).toFixed(2);
+        document.getElementById('res-gros').innerText = "x" + (baseCote * (5 + rand * 10)).toFixed(2);
+
+        const status = document.getElementById('tour-status');
+        if(rand > 0.3) {
+            status.innerText = currentStudio === 'aviator' ? "TOUR TSARA ✈️" : "TOUR TSARA 🚀";
+            status.style.color = "#27ae60";
+        } else {
+            status.innerText = "TOUR RATSY 💔";
+            status.style.color = "#d32f2f";
+        }
+
+        document.getElementById('result-area').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
