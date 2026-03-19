@@ -5,50 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mandroka Vola - Studio Edition</title>
     <style>
-        :root {
-            --aviator: #d32f2f;
-            --cosmos: #f39c12;
-            --bg: #f0f2f5;
-            --card: #ffffff;
-            --input-bg: #e8eaed;
-        }
-
+        :root { --aviator: #d32f2f; --cosmos: #f39c12; --bg: #f0f2f5; --card: #ffffff; --input-bg: #e8eaed; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; display: flex; justify-content: center; }
         .app { width: 100%; max-width: 450px; min-height: 100vh; padding-bottom: 80px; position: relative; }
 
-        /* Navigation ambony */
-        .tabs { display: flex; background: white; padding: 10px; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .tab { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; background: #eee; }
+        /* HEADER & TOP NAVIGATION (Araka ny sary) */
+        .top-nav { background: white; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; }
+        .user-info { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: bold; color: #2c3e50; }
+        .top-icons { display: flex; gap: 8px; }
+        .icon-btn { background: #eee; border: none; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+        .icon-btn:active { background: #ccc; }
+        .btn-logout { border: 1px solid var(--aviator); color: var(--aviator); background: white; padding: 5px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: bold; cursor: pointer; }
+
+        /* TABS SELECTION */
+        .tabs { display: flex; background: white; padding: 10px; gap: 10px; }
+        .tab { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; background: #eee; }
         .tab.active-aviator { background: var(--aviator); color: white; }
         .tab.active-cosmos { background: var(--cosmos); color: white; }
 
-        /* Formulaires */
-        .container { padding: 20px; }
-        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
-        .title-studio { font-weight: 800; text-transform: uppercase; margin-bottom: 15px; font-size: 1.1rem; }
-        
+        /* FORM & CARDS */
+        .container { padding: 15px; }
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; margin-bottom: 20px; }
         .field { text-align: left; margin-bottom: 15px; }
-        .label { font-size: 0.75rem; font-weight: bold; color: #666; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .label { font-size: 0.75rem; font-weight: bold; color: #888; margin-bottom: 5px; display: block; text-transform: uppercase; }
         .input { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--input-bg); font-size: 1.2rem; font-family: monospace; box-sizing: border-box; text-align: center; }
 
-        .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; margin-top: 10px; text-transform: uppercase; }
+        .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; }
         .btn-aviator { background: linear-gradient(45deg, #b71c1c, #d32f2f); }
         .btn-cosmos { background: linear-gradient(45deg, #d32f2f, #27ae60); }
 
-        /* Valiny CosmosX (Araka ny sary) */
-        .res-card { background: white; margin-top: 20px; border-radius: 20px; padding: 20px; display: none; border-top: 5px solid; }
-        .status-tour { font-weight: 900; font-size: 1.4rem; margin-bottom: 10px; }
+        /* RESULT AREA */
+        .res-card { background: white; border-radius: 20px; padding: 20px; display: none; border-top: 5px solid; }
         .time-big { font-size: 2.5rem; font-weight: 900; color: #27ae60; margin: 10px 0; font-family: monospace; }
-        
         .grid-gain { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .box-gain { background: #f8f9fa; padding: 15px; border-radius: 15px; border: 1px solid #eee; }
-        .g-label { font-size: 0.65rem; font-weight: bold; color: #888; text-transform: uppercase; display: block; }
         .g-val { font-size: 1.3rem; font-weight: 900; }
 
-        .consigne { background: #fff5f5; padding: 15px; border-radius: 15px; margin-top: 15px; font-size: 0.85rem; border: 1px solid #ffe3e3; }
+        /* FLOATING CLOCK */
+        .f-clock { position: fixed; top: 60px; right: 20px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 10px; font-family: monospace; font-weight: bold; z-index: 1000; border: 1px solid #444; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
-        /* Floating Clock */
-        .f-clock { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 8px; font-family: monospace; font-weight: bold; font-size: 0.9rem; z-index: 100; border: 1px solid #555; }
+        /* BOTTOM NAV */
+        nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #ddd; }
     </style>
 </head>
 <body>
@@ -56,137 +53,87 @@
 <div class="app">
     <div class="f-clock" id="live-clock">00:00:00</div>
 
+    <div class="top-nav">
+        <div class="user-info">👤 Boss Bet</div>
+        <div class="top-icons">
+            <button class="icon-btn" onclick="alert('Mavitrika ny maody alina')">🌙</button>
+            <button class="icon-btn" onclick="location.reload()">🏠</button>
+            <button class="icon-btn" onclick="switchTab('history')">📜</button>
+            <button class="icon-btn" onclick="alert('Admin Panel')">⚙️</button>
+            <button class="btn-logout" onclick="alert('Mivoaka ny kaonty...')">Deconnexion</button>
+        </div>
+    </div>
+
     <div class="tabs">
-        <button id="tab-av" class="tab active-aviator" onclick="switchMode('aviator')">✈️ AVIATOR</button>
-        <button id="tab-co" class="tab" onclick="switchMode('cosmos')">🚀 COSMOS X</button>
+        <button id="t-av" class="tab active-aviator" onclick="switchMode('aviator')">✈️ AVIATOR</button>
+        <button id="t-co" class="tab" onclick="switchMode('cosmos')">🚀 COSMOS X</button>
     </div>
 
     <div class="container">
-        <div id="view-aviator" class="card">
-            <div class="title-studio" style="color: var(--aviator);">✈️ Aviator Studio</div>
-            <div class="field">
-                <span class="label">🕒 Heure du départ</span>
-                <input type="text" id="av-time" class="input" placeholder="HH : MM">
-            </div>
-            <div class="field">
-                <span class="label">🎯 Multiplicateur Cible</span>
-                <input type="number" id="av-cote" class="input" placeholder="2.00">
-            </div>
-            <button class="btn-calc btn-aviator" onclick="calcAviator()">Calculer Analytics</button>
+        <div id="v-aviator" class="card">
+            <div style="color:var(--aviator); font-weight:900; margin-bottom:15px;">AVIATOR STUDIO</div>
+            <div class="field"><span class="label">🕒 Heure du départ</span><input type="text" id="av-t" class="input" placeholder="HH : MM"></div>
+            <div class="field"><span class="label">🎯 Multiplicateur Cible</span><input type="number" id="av-c" class="input" placeholder="2.00"></div>
+            <button class="btn-calc btn-aviator" onclick="actionCalc('aviator')">Calculer Analytics</button>
         </div>
 
-        <div id="view-cosmos" class="card" style="display: none;">
-            <div class="title-studio" style="color: var(--cosmos);">🚀 CosmosX Studio</div>
-            <div class="field">
-                <span class="label">🎰 Tour (6 chiffres)</span>
-                <input type="number" id="co-tour" class="input" placeholder="063291">
-            </div>
-            <div class="field">
-                <span class="label">🕒 Heure Exacte</span>
-                <input type="text" id="co-time" class="input" placeholder="04:02:21">
-            </div>
-            <div class="field">
-                <span class="label">🎯 Multiplicateur (+2.00)</span>
-                <input type="number" id="co-cote" class="input" placeholder="2.71">
-            </div>
-            <button class="btn-calc btn-cosmos" onclick="calcCosmos()">Prédiction Cosmos X</button>
+        <div id="v-cosmos" class="card" style="display:none;">
+            <div style="color:var(--cosmos); font-weight:900; margin-bottom:15px;">COSMOSX STUDIO</div>
+            <div class="field"><span class="label">🎰 Tour (6 chiffres)</span><input type="number" id="co-tr" class="input" placeholder="063291"></div>
+            <div class="field"><span class="label">🕒 Heure Exacte</span><input type="text" id="co-t" class="input" placeholder="04:02:21"></div>
+            <button class="btn-calc btn-cosmos" onclick="actionCalc('cosmos')">Prédiction Cosmos X</button>
         </div>
 
-        <div id="res-area" class="res-card">
-            <div style="font-size: 0.7rem; font-weight: bold; color: #999; margin-bottom: 5px;">🚀 INDICATEUR DES TOURS</div>
-            <div id="res-status" class="status-tour">TOUR TSARA ✈️</div>
-            
-            <div style="font-size: 0.7rem; font-weight: bold; color: #888;">✋ Heure prédite</div>
-            <div id="res-time-val" class="time-big">00:00:00</div>
-
-            <div id="extra-cosmos" style="display:none; margin-bottom: 15px;">
-                <div class="grid-gain" style="margin-bottom: 10px;">
-                    <div class="box-gain"><span class="g-label">🎰 Tour</span><span id="c-tour-1" class="g-val" style="color:#27ae60">---</span></div>
-                    <div class="box-gain"><span class="g-label">🎰 Tour</span><span id="c-tour-2" class="g-val" style="color:#27ae60">---</span></div>
-                </div>
-            </div>
-
+        <div id="res-box" class="res-card">
+            <div id="res-st" style="font-weight:900; font-size:1.2rem;">TOUR TSARA</div>
+            <div id="res-time" class="time-big">00:00:00</div>
             <div class="grid-gain">
-                <div class="box-gain">
-                    <span class="g-label">💸 Petit Gain</span>
-                    <span id="res-petit" class="g-val" style="color: #27ae60;">x0.00</span>
-                </div>
-                <div class="box-gain">
-                    <span class="g-label">💰 Gros Gain</span>
-                    <span id="res-gros" class="g-val" style="color: #d32f2f;">x0.00</span>
-                </div>
-            </div>
-
-            <div class="consigne">
-                <span style="color: #666; font-weight: bold;">📋 CONSIGNE DU TOUR</span><br>
-                <div id="res-consigne" style="margin-top:5px; color: #2c3e50;">
-                    <span style="color: #3498db;">●</span> Miser après 1 bleu avant l'heure prédite
-                </div>
+                <div class="box-gain"><span class="label">Petit Gain</span><span id="p-gain" class="g-val" style="color:#27ae60">x0.00</span></div>
+                <div class="box-gain"><span class="label">Gros Gain</span><span id="g-gain" class="g-val" style="color:#d32f2f">x0.00</span></div>
             </div>
         </div>
     </div>
+
+    <nav>
+        <button class="icon-btn" onclick="location.reload()">🏠</button>
+        <button class="icon-btn" onclick="actionCalc('aviator')">🎯</button>
+        <button class="icon-btn" onclick="alert('Historique misokatra...')">📜</button>
+    </nav>
 </div>
 
 <script>
-    let mode = 'aviator';
+    let currentMode = 'aviator';
 
-    // Update Live Clock
+    // Live Clock Logic
     setInterval(() => {
-        const n = new Date();
-        document.getElementById('live-clock').innerText = n.getHours().toString().padStart(2,'0')+":"+n.getMinutes().toString().padStart(2,'0')+":"+n.getSeconds().toString().padStart(2,'0');
+        const d = new Date();
+        document.getElementById('live-clock').innerText = d.toTimeString().split(' ')[0];
     }, 1000);
 
     function switchMode(m) {
-        mode = m;
-        document.getElementById('view-aviator').style.display = m === 'aviator' ? 'block' : 'none';
-        document.getElementById('view-cosmos').style.display = m === 'cosmos' ? 'block' : 'none';
-        document.getElementById('tab-av').className = m === 'aviator' ? 'tab active-aviator' : 'tab';
-        document.getElementById('tab-co').className = m === 'cosmos' ? 'tab active-cosmos' : 'tab';
-        document.getElementById('res-area').style.display = 'none';
+        currentMode = m;
+        document.getElementById('v-aviator').style.display = m === 'aviator' ? 'block' : 'none';
+        document.getElementById('v-cosmos').style.display = m === 'cosmos' ? 'block' : 'none';
+        document.getElementById('t-av').className = m === 'aviator' ? 'tab active-aviator' : 'tab';
+        document.getElementById('t-co').className = m === 'cosmos' ? 'tab active-cosmos' : 'tab';
+        document.getElementById('res-box').style.display = 'none';
     }
 
-    function calcAviator() {
-        const t = document.getElementById('av-time').value;
-        if(!t) return alert("Fenoy ny lera!");
-        showResult('aviator');
-    }
-
-    function calcCosmos() {
-        const tour = document.getElementById('co-tour').value;
-        if(!tour) return alert("Ampidiro ny Tour!");
-        showResult('cosmos');
-    }
-
-    function showResult(type) {
-        const area = document.getElementById('res-area');
-        const extra = document.getElementById('extra-cosmos');
-        area.style.display = 'block';
-        area.style.borderTopColor = type === 'aviator' ? '#d32f2f' : '#27ae60';
-
-        const rand = Math.random();
+    function actionCalc(type) {
+        const res = document.getElementById('res-box');
+        res.style.display = 'block';
+        res.style.borderTopColor = type === 'aviator' ? '#d32f2f' : '#f39c12';
+        
         const now = new Date();
-        now.setMinutes(now.getMinutes() + 2);
+        now.setMinutes(now.getMinutes() + Math.floor(Math.random()*5));
+        document.getElementById('res-time').innerText = now.toTimeString().split(' ')[0];
         
-        document.getElementById('res-time-val').innerText = now.getHours().toString().padStart(2,'0')+":"+now.getMinutes().toString().padStart(2,'0')+":"+Math.floor(Math.random()*60).toString().padStart(2,'0');
-        
-        if(type === 'cosmos') {
-            extra.style.display = 'block';
-            const tourBase = parseInt(document.getElementById('co-tour').value) || 63300;
-            document.getElementById('c-tour-1').innerText = tourBase + 14;
-            document.getElementById('c-tour-2').innerText = tourBase + 15;
-            document.getElementById('res-status').innerHTML = "TOUR TSARA 🚀";
-            document.getElementById('res-status').style.color = "#27ae60";
-            document.getElementById('res-petit').innerText = "x" + (5 + rand * 2).toFixed(2);
-            document.getElementById('res-gros').innerText = "x" + (15 + rand * 10).toFixed(2);
-        } else {
-            extra.style.display = 'none';
-            document.getElementById('res-status').innerHTML = rand > 0.3 ? "TOUR TSARA ✈️" : "TOUR RATSY 💔";
-            document.getElementById('res-status').style.color = rand > 0.3 ? "#27ae60" : "#d32f2f";
-            document.getElementById('res-petit').innerText = "x" + (1.5 + rand).toFixed(2);
-            document.getElementById('res-gros').innerText = "x" + (3 + rand * 5).toFixed(2);
-        }
+        const r = Math.random();
+        document.getElementById('p-gain').innerText = "x" + (1.5 + r*2).toFixed(2);
+        document.getElementById('g-gain').innerText = "x" + (10 + r*50).toFixed(2);
+        document.getElementById('res-st').innerText = r > 0.2 ? "TOUR TSARA ✅" : "TOUR RATSY ⚠️";
+        document.getElementById('res-st').style.color = r > 0.2 ? "#27ae60" : "#d32f2f";
     }
 </script>
-
 </body>
 </html>
