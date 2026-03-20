@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - VITANA TSARA V20</title>
+    <title>Mandroka Vola - VITANA TSARA V21</title>
     <style>
         :root { 
             --bg: #f2f2f2; --card: #ffffff; --text: #2c3e50; --input-bg: #e8eaed;
@@ -16,12 +16,10 @@
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; transition: 0.3s; }
         .app { width: 100%; max-width: 450px; min-height: 100vh; position: relative; padding-bottom: 90px; }
 
-        /* HEADER */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); }
         .nav-icons { display: flex; gap: 8px; }
         .n-btn { background: var(--input-bg); border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: var(--text); width: 35px; height: 35px; }
 
-        /* TABS */
         .tabs { display: flex; padding: 10px 15px; gap: 10px; }
         .tab { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; background: var(--input-bg); color: #777; transition: 0.3s; }
         .tab.active-av { background: var(--card); border: 1px solid var(--border); color: var(--aviator); }
@@ -37,21 +35,20 @@
         .btn-av { background: linear-gradient(to right, #d32f2f, #27ae60); }
         .btn-co { background: linear-gradient(to right, #d32f2f, #27ae60); }
 
-        /* RESULT STYLE */
+        /* AVIATOR RESULT */
         .res-box-aviator { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; }
         .h-predites-list { list-style: none; padding: 0; margin: 10px 0; text-align: center; }
         .h-predites-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin: 5px 0; }
-        .h-predites-list li span { color: #888; font-size: 1.2rem; margin-right: 10px; }
         .gain-row { display: flex; align-items: center; justify-content: space-between; background: var(--input-bg); padding: 15px; border-radius: 15px; margin-bottom: 8px; border: 1px solid var(--border); }
         .gain-label { font-size: 0.65rem; font-weight: 800; color: #777; text-align: left; flex: 1; margin-left: 10px; }
 
-        /* HISTORIQUE STYLE */
+        /* COSMOS RESULT */
+        .res-box-cosmos { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; text-align: center; }
+
+        /* HISTORIQUE */
         .hist-item { background: #ffffff; border-radius: 15px; padding: 15px; margin-bottom: 12px; border: 1px solid #e0e0e0; position: relative; color: #333; text-align: left; }
         .hist-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-        .hist-tag { background: #f0f0f0; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; color: #777; display: flex; align-items: center; gap: 5px; }
         .delete-icon { color: #add8e6; cursor: pointer; font-size: 1.2rem; }
-        .hist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; font-size: 0.9rem; }
-        .hist-gains { display: flex; gap: 10px; font-weight: bold; font-size: 0.85rem; color: #27ae60; }
 
         .f-clock { position: fixed; top: 120px; left: 15px; background: rgba(0,0,0,0.8); color: #fff; padding: 8px 12px; border-radius: 10px; font-family: monospace; font-weight: bold; z-index: 1000; }
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); }
@@ -96,6 +93,8 @@
                 <div class="f-input-wrap"><input type="number" id="co-tr" class="f-input" value="063291"></div>
                 <div class="f-label">🕒 HEURE EXACTE</div>
                 <div class="f-input-wrap"><input type="text" id="co-h" class="f-input" placeholder="00:00:00"></div>
+                <div class="f-label">🎯 MULTIPLICATEUR (+2.00)</div>
+                <div class="f-input-wrap"><input type="number" id="co-c" class="f-input" value="2.71"></div>
                 <button class="btn-main btn-co" onclick="calculateCosmos()">🚀 PRÉDICTION COSMOS X</button>
             </div>
 
@@ -106,9 +105,22 @@
                     <li><span>2.</span> <b id="av-h2">00:00:00</b></li>
                     <li><span>3.</span> <b id="av-h3">00:00:00</b></li>
                 </ul>
-                <div class="gain-row"><span>👑</span><span class="gain-label">SÉCURITÉ DES MISES</span><b id="g-av1" style="color:var(--green)">x0.00</b></div>
-                <div class="gain-row"><span>💸</span><span class="gain-label">AFAKA TENTENA TSARA @2EM MISE</span><b id="g-av2" style="color:var(--aviator)">x0.00</b></div>
-                <div class="gain-row"><span>💰</span><span class="gain-label">TENTEO RAHA EFA MBA GAIN ANAO</span><b id="g-av3" style="color:var(--green)">x0.00</b></div>
+                <div class="gain-row"><span>👑</span><span class="gain-label">SÉCURITÉ</span><b id="g-av1" style="color:var(--green)">x0.00</b></div>
+                <div class="gain-row"><span>💸</span><span class="gain-label">TENTENA 2EM</span><b id="g-av2" style="color:var(--aviator)">x0.00</b></div>
+                <div class="gain-row"><span>💰</span><span class="gain-label">GAIN ANAO</span><b id="g-av3" style="color:var(--green)">x0.00</b></div>
+            </div>
+
+            <div id="res-cosmos" class="res-box-cosmos">
+                <div style="color:var(--green); font-weight:bold; margin-bottom:10px;">🚀 TOUR TSARA ✈️</div>
+                <div class="f-label" style="text-align:center">🖐️ Heure prédite</div>
+                <div id="co-res-time" style="font-size:2rem; font-weight:900; color:var(--green); margin-bottom:15px;">00:00:00</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="gain-row" style="flex-direction:column"><span>🎰 TOUR</span><b id="co-t1">---</b></div>
+                    <div class="gain-row" style="flex-direction:column"><span>🎰 TOUR</span><b id="co-t2">---</b></div>
+                </div>
+                <div style="margin-top:10px; font-size:0.75rem; text-align:left; background:#fff5f5; padding:10px; border-radius:10px; border:1px solid #ffe3e3;">
+                    <b>📋 CONSIGNE:</b> Miser après 1 bleu avant l'heure prédite.
+                </div>
             </div>
         </div>
     </div>
@@ -129,10 +141,7 @@
 
 <script>
     let historyData = [];
-
-    setInterval(() => {
-        document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0];
-    }, 1000);
+    setInterval(() => { document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
 
     function showPage(p) {
         document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page'));
@@ -146,6 +155,7 @@
         document.getElementById('tab-av').className = m === 'aviator' ? 'tab active-av' : 'tab';
         document.getElementById('tab-co').className = m === 'cosmos' ? 'tab active-co' : 'tab';
         document.getElementById('res-aviator').style.display = 'none';
+        document.getElementById('res-cosmos').style.display = 'none';
     }
 
     function calculateAviator() {
@@ -156,56 +166,58 @@
         if(p.length >= 2) baseDate.setHours(p[0], p[1], p[2] || 0);
 
         document.getElementById('res-aviator').style.display = 'block';
-
-        // Logique Logique des 3 heures (Intervalle)
         const d1 = new Date(baseDate.getTime() + (Math.floor(Math.random() * 2) + 1) * 60000 + (Math.random() * 59000));
         const d2 = new Date(baseDate.getTime() + (Math.floor(Math.random() * 2) + 4) * 60000 + (Math.random() * 59000));
         const d3 = new Date(baseDate.getTime() + (Math.floor(Math.random() * 2) + 8) * 60000 + (Math.random() * 59000));
 
         const r1 = d1.toTimeString().split(' ')[0];
-        const r2 = d2.toTimeString().split(' ')[0];
-        const r3 = d3.toTimeString().split(' ')[0];
-
         document.getElementById('av-h1').innerText = r1;
-        document.getElementById('av-h2').innerText = r2;
-        document.getElementById('av-h3').innerText = r3;
+        document.getElementById('av-h2').innerText = d2.toTimeString().split(' ')[0];
+        document.getElementById('av-h3').innerText = d3.toTimeString().split(' ')[0];
 
         const g1 = (2 + Math.random() * 1.5).toFixed(2);
         const g2 = (4 + Math.random() * 3).toFixed(2);
         const g3 = (50 + Math.random() * 150).toFixed(2);
-
         document.getElementById('g-av1').innerText = "x" + g1;
         document.getElementById('g-av2').innerText = "x" + g2;
         document.getElementById('g-av3').innerText = "x" + g3;
 
         historyData.unshift({ type:'aviator', inputTime:inputStr, timeStr:r1, petit:g1, moyen:g2, gros:g3, fullDate: new Date().toLocaleString() });
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function calculateCosmos() {
+        const now = new Date();
+        const inputH = document.getElementById('co-h').value || now.toTimeString().split(' ')[0];
+        const trBase = parseInt(document.getElementById('co-tr').value) || 63000;
+        
+        document.getElementById('res-cosmos').style.display = 'block';
+        const resTime = new Date(now.getTime() + (Math.floor(Math.random() * 3) + 2) * 60000).toTimeString().split(' ')[0];
+        
+        document.getElementById('co-res-time').innerText = resTime;
+        document.getElementById('co-t1').innerText = trBase + 14;
+        document.getElementById('co-t2').innerText = trBase + 15;
+
+        historyData.unshift({ type:'cosmos', inputTime:inputH, timeStr:resTime, petit:'1.50', moyen:'2.71', gros:'15.00', fullDate: new Date().toLocaleString() });
     }
 
     function renderHistory() {
         const list = document.getElementById('hist-list');
         list.innerHTML = historyData.length ? historyData.map((h, i) => `
             <div class="hist-item">
-                <div class="hist-header">
-                    <div class="hist-tag">✈️ Aviator</div>
-                    <div class="delete-icon" onclick="deleteHist(${i})">🗑️</div>
-                </div>
-                <div class="hist-grid">
+                <div class="hist-header"><div class="hist-tag">${h.type==='aviator'?'✈️ Aviator':'🚀 Cosmos'}</div><div class="delete-icon" onclick="deleteHist(${i})">🗑️</div></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.9rem;margin-bottom:10px;">
                     <div><span style="color:#888">Entrée:</span> <span style="color:var(--green)">${h.inputTime}</span></div>
                     <div><span style="color:#888">Prédite:</span> <span style="color:var(--green)">${h.timeStr}</span></div>
                 </div>
-                <div class="hist-gains">
+                <div style="display:flex;gap:10px;font-weight:bold;font-size:0.85rem;color:#27ae60;">
                     <span>👑 x${h.petit}</span> <span>💸 x${h.moyen}</span> <span>💰 x${h.gros}</span>
                 </div>
-                <div style="font-size:0.7rem; color:#bbb; margin-top:10px; border-top:1px solid #f5f5f5; padding-top:5px;">${h.fullDate}</div>
+                <div style="font-size:0.7rem;color:#bbb;margin-top:10px;border-top:1px solid #f5f5f5;padding-top:5px;">${h.fullDate}</div>
             </div>
-        `).join('') : "<p style='text-align:center; color:#999'>Tsy mbola misy tantara.</p>";
+        `).join('') : "<p style='text-align:center;color:#999'>Tsy mbola misy tantara.</p>";
     }
 
-    function deleteHist(i) {
-        historyData.splice(i, 1);
-        renderHistory();
-    }
+    function deleteHist(i) { historyData.splice(i, 1); renderHistory(); }
 </script>
 </body>
 </html>
