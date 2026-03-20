@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - VITANA TSARA V21</title>
+    <title>Mandroka Vola - VITANA TSARA V22</title>
     <style>
         :root { 
             --bg: #f2f2f2; --card: #ffffff; --text: #2c3e50; --input-bg: #e8eaed;
@@ -35,17 +35,12 @@
         .btn-av { background: linear-gradient(to right, #d32f2f, #27ae60); }
         .btn-co { background: linear-gradient(to right, #d32f2f, #27ae60); }
 
-        /* AVIATOR RESULT */
-        .res-box-aviator { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; }
-        .h-predites-list { list-style: none; padding: 0; margin: 10px 0; text-align: center; }
+        .res-box-aviator, .res-box-cosmos { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; text-align: center; }
+        .h-predites-list { list-style: none; padding: 0; margin: 10px 0; }
         .h-predites-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin: 5px 0; }
         .gain-row { display: flex; align-items: center; justify-content: space-between; background: var(--input-bg); padding: 15px; border-radius: 15px; margin-bottom: 8px; border: 1px solid var(--border); }
         .gain-label { font-size: 0.65rem; font-weight: 800; color: #777; text-align: left; flex: 1; margin-left: 10px; }
 
-        /* COSMOS RESULT */
-        .res-box-cosmos { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; text-align: center; }
-
-        /* HISTORIQUE */
         .hist-item { background: #ffffff; border-radius: 15px; padding: 15px; margin-bottom: 12px; border: 1px solid #e0e0e0; position: relative; color: #333; text-align: left; }
         .hist-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
         .delete-icon { color: #add8e6; cursor: pointer; font-size: 1.2rem; }
@@ -81,7 +76,7 @@
             <div id="form-aviator" class="studio-card">
                 <div style="color:var(--aviator); font-weight:900; margin-bottom:20px;">✈️ VERT RAIKA ⭐</div>
                 <div class="f-label">🕒 HEURE DU DÉPART</div>
-                <div class="f-input-wrap"><input type="text" id="av-h" class="f-input" placeholder="00 : 00 : 00"></div>
+                <div class="f-input-wrap"><input type="text" id="av-h" class="f-input" placeholder="00:00:00"></div>
                 <div class="f-label">🎯 MULTIPLICATEUR CIBLE (+2.70)</div>
                 <div class="f-input-wrap"><input type="number" id="av-c" class="f-input" value="2.70"></div>
                 <button class="btn-main btn-av" onclick="calculateAviator()">🔮 CALCULER</button>
@@ -99,7 +94,7 @@
             </div>
 
             <div id="res-aviator" class="res-box-aviator">
-                <span class="f-label" style="text-align:center">🖐️ HEURES PRÉDITES</span>
+                <span class="f-label">🖐️ HEURES PRÉDITES</span>
                 <ul class="h-predites-list">
                     <li><span>1.</span> <b id="av-h1">00:00:00</b></li>
                     <li><span>2.</span> <b id="av-h2">00:00:00</b></li>
@@ -112,7 +107,7 @@
 
             <div id="res-cosmos" class="res-box-cosmos">
                 <div style="color:var(--green); font-weight:bold; margin-bottom:10px;">🚀 TOUR TSARA ✈️</div>
-                <div class="f-label" style="text-align:center">🖐️ Heure prédite</div>
+                <div class="f-label">🖐️ HEURE PRÉDITE</div>
                 <div id="co-res-time" style="font-size:2rem; font-weight:900; color:var(--green); margin-bottom:15px;">00:00:00</div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                     <div class="gain-row" style="flex-direction:column"><span>🎰 TOUR</span><b id="co-t1">---</b></div>
@@ -126,10 +121,7 @@
     </div>
 
     <div id="hist-page" class="page">
-        <div class="container">
-            <h3 style="text-align:center">📜 Historique</h3>
-            <div id="hist-list"></div>
-        </div>
+        <div class="container"><h3 style="text-align:center">📜 Historique</h3><div id="hist-list"></div></div>
     </div>
 
     <nav>
@@ -186,18 +178,14 @@
     }
 
     function calculateCosmos() {
-        const now = new Date();
-        const inputH = document.getElementById('co-h').value || now.toTimeString().split(' ')[0];
         const trBase = parseInt(document.getElementById('co-tr').value) || 63000;
-        
+        const targetC = document.getElementById('co-c').value;
         document.getElementById('res-cosmos').style.display = 'block';
-        const resTime = new Date(now.getTime() + (Math.floor(Math.random() * 3) + 2) * 60000).toTimeString().split(' ')[0];
-        
+        const resTime = new Date(Date.now() + 180000).toTimeString().split(' ')[0];
         document.getElementById('co-res-time').innerText = resTime;
         document.getElementById('co-t1').innerText = trBase + 14;
         document.getElementById('co-t2').innerText = trBase + 15;
-
-        historyData.unshift({ type:'cosmos', inputTime:inputH, timeStr:resTime, petit:'1.50', moyen:'2.71', gros:'15.00', fullDate: new Date().toLocaleString() });
+        historyData.unshift({ type:'cosmos', inputTime:document.getElementById('co-h').value||'Now', timeStr:resTime, petit:'1.50', moyen:targetC, gros:'15.00', fullDate: new Date().toLocaleString() });
     }
 
     function renderHistory() {
@@ -205,14 +193,13 @@
         list.innerHTML = historyData.length ? historyData.map((h, i) => `
             <div class="hist-item">
                 <div class="hist-header"><div class="hist-tag">${h.type==='aviator'?'✈️ Aviator':'🚀 Cosmos'}</div><div class="delete-icon" onclick="deleteHist(${i})">🗑️</div></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.9rem;margin-bottom:10px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.9rem;">
                     <div><span style="color:#888">Entrée:</span> <span style="color:var(--green)">${h.inputTime}</span></div>
                     <div><span style="color:#888">Prédite:</span> <span style="color:var(--green)">${h.timeStr}</span></div>
                 </div>
-                <div style="display:flex;gap:10px;font-weight:bold;font-size:0.85rem;color:#27ae60;">
+                <div style="display:flex;gap:10px;font-weight:bold;font-size:0.85rem;color:#27ae60;margin-top:5px;">
                     <span>👑 x${h.petit}</span> <span>💸 x${h.moyen}</span> <span>💰 x${h.gros}</span>
                 </div>
-                <div style="font-size:0.7rem;color:#bbb;margin-top:10px;border-top:1px solid #f5f5f5;padding-top:5px;">${h.fullDate}</div>
             </div>
         `).join('') : "<p style='text-align:center;color:#999'>Tsy mbola misy tantara.</p>";
     }
