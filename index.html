@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - Pro Version 18</title>
+    <title>Mandroka Vola - VITANA TSARA V20</title>
     <style>
         :root { 
             --bg: #f2f2f2; --card: #ffffff; --text: #2c3e50; --input-bg: #e8eaed;
@@ -37,14 +37,15 @@
         .btn-av { background: linear-gradient(to right, #d32f2f, #27ae60); }
         .btn-co { background: linear-gradient(to right, #d32f2f, #27ae60); }
 
-        /* AVIATOR RESULT STYLE (Sary 12) */
+        /* RESULT STYLE */
         .res-box-aviator { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; }
         .h-predites-list { list-style: none; padding: 0; margin: 10px 0; text-align: center; }
         .h-predites-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin: 5px 0; }
+        .h-predites-list li span { color: #888; font-size: 1.2rem; margin-right: 10px; }
         .gain-row { display: flex; align-items: center; justify-content: space-between; background: var(--input-bg); padding: 15px; border-radius: 15px; margin-bottom: 8px; border: 1px solid var(--border); }
         .gain-label { font-size: 0.65rem; font-weight: 800; color: #777; text-align: left; flex: 1; margin-left: 10px; }
 
-        /* HISTORIQUE STYLE (Sary 11) */
+        /* HISTORIQUE STYLE */
         .hist-item { background: #ffffff; border-radius: 15px; padding: 15px; margin-bottom: 12px; border: 1px solid #e0e0e0; position: relative; color: #333; text-align: left; }
         .hist-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
         .hist-tag { background: #f0f0f0; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; color: #777; display: flex; align-items: center; gap: 5px; }
@@ -52,10 +53,7 @@
         .hist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; font-size: 0.9rem; }
         .hist-gains { display: flex; gap: 10px; font-weight: bold; font-size: 0.85rem; color: #27ae60; }
 
-        /* COSMOS RESULT (Sary 10) */
-        .res-box-cosmos { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; text-align: center; }
-
-        .f-clock { position: fixed; top: 120px; left: 15px; background: rgba(0,0,0,0.7); color: #fff; padding: 5px 10px; border-radius: 8px; font-family: monospace; font-size: 0.8rem; z-index: 1000; border: 1px solid #555; }
+        .f-clock { position: fixed; top: 120px; left: 15px; background: rgba(0,0,0,0.8); color: #fff; padding: 8px 12px; border-radius: 10px; font-family: monospace; font-weight: bold; z-index: 1000; }
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); }
         .page { display: none; padding-bottom: 100px; }
         .active-page { display: block; }
@@ -67,7 +65,7 @@
     <div class="f-clock" id="live-clock">00:00:00</div>
 
     <div class="header">
-        <div style="font-weight:bold">👤 Boss Bet</div>
+        <div style="font-weight:bold">👤 VITANA TSARA</div>
         <div class="nav-icons">
             <button class="n-btn" onclick="document.body.classList.toggle('dark-mode')">🌙</button>
             <button class="n-btn" onclick="showPage('home')">🏠</button>
@@ -87,9 +85,9 @@
                 <div style="color:var(--aviator); font-weight:900; margin-bottom:20px;">✈️ VERT RAIKA ⭐</div>
                 <div class="f-label">🕒 HEURE DU DÉPART</div>
                 <div class="f-input-wrap"><input type="text" id="av-h" class="f-input" placeholder="00 : 00 : 00"></div>
-                <div class="f-label">🎯 MULTIPLICATEUR CIBLE (+2.00)</div>
+                <div class="f-label">🎯 MULTIPLICATEUR CIBLE (+2.70)</div>
                 <div class="f-input-wrap"><input type="number" id="av-c" class="f-input" value="2.70"></div>
-                <button class="btn-main btn-av" onclick="calculate('aviator')">🔮 CALCULER</button>
+                <button class="btn-main btn-av" onclick="calculateAviator()">🔮 CALCULER</button>
             </div>
 
             <div id="form-cosmos" class="studio-card" style="display:none">
@@ -98,29 +96,19 @@
                 <div class="f-input-wrap"><input type="number" id="co-tr" class="f-input" value="063291"></div>
                 <div class="f-label">🕒 HEURE EXACTE</div>
                 <div class="f-input-wrap"><input type="text" id="co-h" class="f-input" placeholder="00:00:00"></div>
-                <button class="btn-main btn-co" onclick="calculate('cosmos')">🚀 PRÉDICTION COSMOS X</button>
+                <button class="btn-main btn-co" onclick="calculateCosmos()">🚀 PRÉDICTION COSMOS X</button>
             </div>
 
             <div id="res-aviator" class="res-box-aviator">
                 <span class="f-label" style="text-align:center">🖐️ HEURES PRÉDITES</span>
                 <ul class="h-predites-list">
-                    <li id="av-h1">00:00:00</li>
-                    <li id="av-h2">00:00:00</li>
-                    <li id="av-h3">00:00:00</li>
+                    <li><span>1.</span> <b id="av-h1">00:00:00</b></li>
+                    <li><span>2.</span> <b id="av-h2">00:00:00</b></li>
+                    <li><span>3.</span> <b id="av-h3">00:00:00</b></li>
                 </ul>
-                <div class="gain-row"><span>👑</span><span class="gain-label">SÉCURITÉ</span><b id="g-av1" style="color:var(--green)">x3.55</b></div>
-                <div class="gain-row"><span>💸</span><span class="gain-label">TENTENA 2EM</span><b id="g-av2" style="color:var(--aviator)">x5.19</b></div>
-                <div class="gain-row"><span>💰</span><span class="gain-label">GAIN ANAO</span><b id="g-av3" style="color:var(--green)">x150.00</b></div>
-            </div>
-
-            <div id="res-cosmos" class="res-box-cosmos">
-                <div style="color:var(--green); font-weight:bold; margin-bottom:10px;">🚀 TOUR TSARA ✈️</div>
-                <div class="f-label" style="text-align:center">🖐️ Heure prédite</div>
-                <div id="co-res-time" style="font-size:2rem; font-weight:900; color:var(--green); margin-bottom:15px;">00:00:00</div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div class="gain-row" style="flex-direction:column"><span>🎰 TOUR</span><b id="co-t1">---</b></div>
-                    <div class="gain-row" style="flex-direction:column"><span>🎰 TOUR</span><b id="co-t2">---</b></div>
-                </div>
+                <div class="gain-row"><span>👑</span><span class="gain-label">SÉCURITÉ DES MISES</span><b id="g-av1" style="color:var(--green)">x0.00</b></div>
+                <div class="gain-row"><span>💸</span><span class="gain-label">AFAKA TENTENA TSARA @2EM MISE</span><b id="g-av2" style="color:var(--aviator)">x0.00</b></div>
+                <div class="gain-row"><span>💰</span><span class="gain-label">TENTEO RAHA EFA MBA GAIN ANAO</span><b id="g-av3" style="color:var(--green)">x0.00</b></div>
             </div>
         </div>
     </div>
@@ -158,35 +146,40 @@
         document.getElementById('tab-av').className = m === 'aviator' ? 'tab active-av' : 'tab';
         document.getElementById('tab-co').className = m === 'cosmos' ? 'tab active-co' : 'tab';
         document.getElementById('res-aviator').style.display = 'none';
-        document.getElementById('res-cosmos').style.display = 'none';
     }
 
-    function calculate(type) {
+    function calculateAviator() {
         const now = new Date();
-        const inputH = document.getElementById(type === 'aviator' ? 'av-h' : 'co-h').value || now.toTimeString().split(' ')[0];
-        
-        const t1 = new Date(now.getTime() + 2*60000).toTimeString().split(' ')[0];
-        const g1 = (2 + Math.random()*2).toFixed(2);
-        const g2 = (5 + Math.random()*5).toFixed(2);
-        const g3 = (50 + Math.random()*150).toFixed(2);
+        const inputStr = document.getElementById('av-h').value || now.toTimeString().split(' ')[0];
+        const p = inputStr.split(':');
+        let baseDate = new Date();
+        if(p.length >= 2) baseDate.setHours(p[0], p[1], p[2] || 0);
 
-        if(type === 'aviator') {
-            document.getElementById('res-aviator').style.display = 'block';
-            document.getElementById('av-h1').innerText = t1;
-            document.getElementById('av-h2').innerText = new Date(now.getTime() + 4*60000).toTimeString().split(' ')[0];
-            document.getElementById('av-h3').innerText = new Date(now.getTime() + 5*60000).toTimeString().split(' ')[0];
-            document.getElementById('g-av1').innerText = "x" + g1;
-            document.getElementById('g-av2').innerText = "x" + g2;
-            document.getElementById('g-av3').innerText = "x" + g3;
-        } else {
-            document.getElementById('res-cosmos').style.display = 'block';
-            document.getElementById('co-res-time').innerText = t1;
-            const tr = parseInt(document.getElementById('co-tr').value) || 63000;
-            document.getElementById('co-t1').innerText = tr + 14;
-            document.getElementById('co-t2').innerText = tr + 15;
-        }
+        document.getElementById('res-aviator').style.display = 'block';
 
-        historyData.unshift({ type, inputTime: inputH, timeStr: t1, petit: g1, moyen: g2, gros: g3, fullDate: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() });
+        // Logique Logique des 3 heures (Intervalle)
+        const d1 = new Date(baseDate.getTime() + (Math.floor(Math.random() * 2) + 1) * 60000 + (Math.random() * 59000));
+        const d2 = new Date(baseDate.getTime() + (Math.floor(Math.random() * 2) + 4) * 60000 + (Math.random() * 59000));
+        const d3 = new Date(baseDate.getTime() + (Math.floor(Math.random() * 2) + 8) * 60000 + (Math.random() * 59000));
+
+        const r1 = d1.toTimeString().split(' ')[0];
+        const r2 = d2.toTimeString().split(' ')[0];
+        const r3 = d3.toTimeString().split(' ')[0];
+
+        document.getElementById('av-h1').innerText = r1;
+        document.getElementById('av-h2').innerText = r2;
+        document.getElementById('av-h3').innerText = r3;
+
+        const g1 = (2 + Math.random() * 1.5).toFixed(2);
+        const g2 = (4 + Math.random() * 3).toFixed(2);
+        const g3 = (50 + Math.random() * 150).toFixed(2);
+
+        document.getElementById('g-av1').innerText = "x" + g1;
+        document.getElementById('g-av2').innerText = "x" + g2;
+        document.getElementById('g-av3').innerText = "x" + g3;
+
+        historyData.unshift({ type:'aviator', inputTime:inputStr, timeStr:r1, petit:g1, moyen:g2, gros:g3, fullDate: new Date().toLocaleString() });
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
     function renderHistory() {
@@ -194,7 +187,7 @@
         list.innerHTML = historyData.length ? historyData.map((h, i) => `
             <div class="hist-item">
                 <div class="hist-header">
-                    <div class="hist-tag">${h.type === 'aviator' ? '✈️ Aviator' : '🚀 Cosmos'}</div>
+                    <div class="hist-tag">✈️ Aviator</div>
                     <div class="delete-icon" onclick="deleteHist(${i})">🗑️</div>
                 </div>
                 <div class="hist-grid">
