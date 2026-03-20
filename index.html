@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - VITANA TSARA V25</title>
+    <title>Mandroka Vola - VITANA TSARA V26</title>
     <style>
         :root { 
             --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef;
@@ -27,16 +27,19 @@
         .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); }
         .f-input { width: 100%; border: none; background: transparent; font-size: 1.3rem; font-family: monospace; text-align: center; outline: none; font-weight: bold; color: var(--green); }
         .btn-main { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; background: linear-gradient(90deg, #d32f2f, #28a745); }
+        
+        /* RESULT BOX COSMOS */
         .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 10px; text-align: center; }
-        .big-time { font-size: 2.5rem; font-weight: 900; color: var(--green); margin: 10px 0; font-family: monospace; }
+        .big-time { font-size: 2.5rem; font-weight: 900; color: var(--green); margin: 5px 0; font-family: monospace; }
+        .cote-res { font-size: 1.4rem; font-weight: 900; color: var(--cosmos); margin-bottom: 10px; }
         .tour-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
         .tour-item { background: var(--input-bg); padding: 15px; border-radius: 15px; border: 1px solid var(--border); }
         .tour-val { font-size: 1.2rem; font-weight: 900; font-family: monospace; }
         .consigne-box { background: #fff5f5; border: 1px solid #ffe3e3; padding: 12px; border-radius: 12px; text-align: left; font-size: 0.85rem; margin-top: 10px; color: #444; }
+        
         .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); }
         .page { display: none; } .active-page { display: block; }
-        .hist-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); }
     </style>
 </head>
 <body>
@@ -48,9 +51,9 @@
             <button class="n-btn" onclick="document.body.classList.toggle('dark-mode')">🌙</button>
             <button class="n-btn" onclick="showPage('home')">🏠</button>
             <button class="n-btn" onclick="showPage('hist')">📜</button>
-            <button class="n-btn">⚙️</button>
         </div>
     </div>
+
     <div id="home-page" class="page active-page">
         <div class="tabs">
             <button id="tab-av" class="tab active-av" onclick="switchMode('aviator')">✈️ AVIATOR</button>
@@ -65,6 +68,7 @@
                 <div class="f-input-wrap"><input type="number" id="av-c" class="f-input" value="2.70"></div>
                 <button class="btn-main" onclick="calculateAviator()">🔮 CALCULER</button>
             </div>
+
             <div id="form-cosmos" class="studio-card" style="display:none">
                 <div style="color:var(--cosmos); font-weight:900; margin-bottom:15px;">🚀 COSMOS X ⭐</div>
                 <label class="f-label">🎰 TOUR (6 CHIFFRES)</label>
@@ -75,48 +79,51 @@
                 <div class="f-input-wrap"><input type="number" id="co-c" class="f-input" value="2.71"></div>
                 <button class="btn-main" onclick="calculateCosmos()">🚀 PRÉDICTION COSMOS X</button>
             </div>
-            <div id="res-aviator" class="res-box">
-                <div style="color:var(--green); font-weight:bold; margin-bottom:10px;">🖐️ HEURES PRÉDITES</div>
-                <div id="av-h-list" style="font-size:1.5rem; font-weight:900; color:var(--green); margin-bottom:10px; font-family:monospace;"></div>
-            </div>
+
             <div id="res-cosmos" class="res-box">
-                <div style="color:var(--green); font-weight:bold; margin-bottom:10px;">🚀 TOUR TSARA ✈️</div>
+                <div style="color:var(--green); font-weight:bold; margin-bottom:5px;">🚀 TOUR TSARA ✈️</div>
+                <div class="f-label" style="text-align:center">🖐️ HEURE PRÉDITE</div>
                 <div class="big-time" id="co-res-time">00:00:00</div>
-                <div class="tour-grid">
+                <div class="cote-res" id="co-res-cote">x0.00</div> <div class="tour-grid">
                     <div class="tour-item"><span class="tour-val" id="co-t1">---</span></div>
                     <div class="tour-item"><span class="tour-val" id="co-t2">---</span></div>
                 </div>
                 <div class="consigne-box"><b>📋 CONSIGNE:</b> Miser après 1 bleu avant l'heure prédite.</div>
             </div>
+
+            <div id="res-aviator" class="res-box">
+                <div style="color:var(--green); font-weight:bold; margin-bottom:10px;">🖐️ HEURES PRÉDITES</div>
+                <div id="av-h-list" style="font-size:1.5rem; font-weight:900; color:var(--green); font-family:monospace;"></div>
+            </div>
         </div>
     </div>
+
     <div id="hist-page" class="page"><div class="container"><div id="hist-list"></div></div></div>
-    <nav><button class="n-btn" onclick="showPage('home')">🏠</button><button class="n-btn" style="color:var(--aviator)">🎯</button><button class="n-btn" onclick="showPage('hist')">📜</button></nav>
+    <nav><button class="n-btn" onclick="showPage('home')">🏠</button><button class="n-btn" onclick="showPage('hist')">📜</button></nav>
 </div>
+
 <script>
     let historyData = [];
     setInterval(() => { document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
-    function showPage(p) { document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page')); document.getElementById(p + '-page').classList.add('active-page'); if(p === 'hist') renderHistory(); }
+    function showPage(p) { document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page')); document.getElementById(p + '-page').classList.add('active-page'); }
     function switchMode(m) { document.getElementById('form-aviator').style.display = m === 'aviator' ? 'block' : 'none'; document.getElementById('form-cosmos').style.display = m === 'cosmos' ? 'block' : 'none'; document.getElementById('tab-av').className = m === 'aviator' ? 'tab active-av' : 'tab'; document.getElementById('tab-co').className = m === 'cosmos' ? 'tab active-co' : 'tab'; }
+    
     function calculateAviator() { 
-        const h = document.getElementById('av-h').value || "Now"; document.getElementById('res-aviator').style.display = 'block';
+        document.getElementById('res-aviator').style.display = 'block';
         const res = new Date(Date.now() + 120000).toTimeString().split(' ')[0];
         document.getElementById('av-h-list').innerText = res;
-        historyData.unshift({ type:'Aviator', input:h, res:res });
     }
+
     function calculateCosmos() {
         const tr = parseInt(document.getElementById('co-tr').value) || 0;
         const targetC = document.getElementById('co-c').value;
         document.getElementById('res-cosmos').style.display = 'block';
+        
         const resTime = new Date(Date.now() + 180000).toTimeString().split(' ')[0];
         document.getElementById('co-res-time').innerText = resTime;
+        document.getElementById('co-res-cote').innerText = "x" + targetC; // Maneho ny côte amin'ny valiny
         document.getElementById('co-t1').innerText = tr + 12;
         document.getElementById('co-t2').innerText = tr + 13;
-        historyData.unshift({ type:'Cosmos', input:document.getElementById('co-h').value||'Now', res:resTime, cote:targetC });
-    }
-    function renderHistory() {
-        const list = document.getElementById('hist-list');
-        list.innerHTML = historyData.map(h => `<div class="hist-card"><b>${h.type}</b>: ${h.input} -> <span style="color:var(--green)">${h.res}</span> ${h.cote ? '(x'+h.cote+')' : ''}</div>`).join('');
     }
 </script>
 </body>
