@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - Studio Professional</title>
+    <title>Mandroka Vola - Update Aviator</title>
     <style>
         :root { 
             --bg: #f2f2f2; --card: #ffffff; --text: #2c3e50; --input-bg: #e8eaed;
@@ -16,48 +16,40 @@
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; transition: 0.3s; }
         .app { width: 100%; max-width: 450px; min-height: 100vh; position: relative; padding-bottom: 90px; }
 
-        /* HEADER */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); }
         .nav-icons { display: flex; gap: 8px; }
         .n-btn { background: var(--input-bg); border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: var(--text); width: 35px; height: 35px; }
 
-        /* TABS */
         .tabs { display: flex; padding: 10px 15px; gap: 10px; }
-        .tab { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; background: var(--input-bg); color: #777; transition: 0.3s; }
+        .tab { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; background: var(--input-bg); color: #777; }
         .tab.active-av { background: var(--card); border: 1px solid var(--border); color: var(--aviator); }
         .tab.active-co { background: var(--cosmos); color: white; }
 
-        /* STUDIO CARDS */
         .container { padding: 15px; }
-        .studio-card { background: var(--card); border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border); }
+        .studio-card { background: var(--card); border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border); }
         .f-label { display: block; text-align: left; font-size: 0.7rem; font-weight: 800; color: #999; margin-bottom: 8px; text-transform: uppercase; }
-        .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 18px; border: 1px solid var(--border); }
+        .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); }
         .f-input { width: 100%; border: none; background: transparent; font-size: 1.3rem; font-family: monospace; text-align: center; outline: none; font-weight: bold; color: var(--green); }
 
-        /* BUTTONS */
         .btn-main { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1rem; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-av { background: linear-gradient(to right, #d32f2f, #27ae60); }
         .btn-co { background: linear-gradient(to right, #d32f2f, #27ae60); }
 
-        /* RESULT COSMOS & AVIATOR */
-        .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; text-align: center; }
-        .res-status { font-size: 1.5rem; font-weight: 900; margin-bottom: 5px; }
-        .res-time { font-size: 2.3rem; font-weight: 900; color: var(--green); font-family: monospace; margin: 10px 0; }
-        
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .box { background: var(--input-bg); padding: 12px; border-radius: 12px; border: 1px solid var(--border); }
-        .box span { font-size: 0.6rem; color: #999; font-weight: 800; display: block; margin-bottom: 3px; }
-        .box b { font-size: 1.1rem; font-family: monospace; }
+        /* VOKATRA AVIATOR VAOVAO (Sary 12) */
+        .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 20px; }
+        .res-title { font-size: 0.7rem; color: #888; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .h-predites-list { list-style: none; padding: 0; margin: 10px 0; }
+        .h-predites-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin: 5px 0; }
+        .h-predites-list li span { color: #888; font-size: 1.2rem; margin-right: 10px; }
 
-        /* HISTORIQUE */
-        .hist-item { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 10px; border-left: 5px solid; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+        .gain-row { display: flex; align-items: center; justify-content: space-between; background: var(--input-bg); padding: 15px; border-radius: 15px; margin-bottom: 8px; border: 1px solid var(--border); }
+        .gain-label { font-size: 0.65rem; font-weight: 800; color: #777; text-align: left; flex: 1; margin-left: 10px; }
+        .gain-val { font-size: 1.2rem; font-weight: 900; font-family: monospace; }
 
         /* FLOATING CLOCK */
-        .f-clock { position: fixed; top: 180px; right: 20px; background: rgba(0,0,0,0.8); color: #fff; padding: 8px 12px; border-radius: 10px; font-family: monospace; font-weight: bold; z-index: 1000; font-size: 0.85rem; }
+        .f-clock { position: fixed; top: 180px; left: 15px; background: rgba(0,0,0,0.8); color: #fff; padding: 8px 12px; border-radius: 10px; font-family: monospace; font-weight: bold; z-index: 1000; }
 
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); }
-        .page { display: none; }
-        .active-page { display: block; }
     </style>
 </head>
 <body>
@@ -68,158 +60,100 @@
     <div class="header">
         <div style="font-weight:bold">👤 Boss Bet</div>
         <div class="nav-icons">
-            <button class="n-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
-            <button class="n-btn" onclick="showPage('home')">🏠</button>
-            <button class="n-btn" onclick="showPage('hist')">📜</button>
+            <button class="n-btn" onclick="document.body.classList.toggle('dark-mode')">🌙</button>
+            <button class="n-btn">🏠</button>
+            <button class="n-btn">📜</button>
             <button class="n-btn">⚙️</button>
         </div>
     </div>
 
-    <div id="home-page" class="page active-page">
-        <div class="tabs">
-            <button id="tab-av" class="tab active-av" onclick="switchMode('aviator')">✈️ AVIATOR</button>
-            <button id="tab-co" class="tab" onclick="switchMode('cosmos')">🚀 COSMOS X</button>
-        </div>
-
-        <div class="container">
-            <div id="form-aviator" class="studio-card">
-                <div style="color:var(--aviator); font-weight:900; margin-bottom:20px;">✈️ VERT RAIKA ⭐<br><small style="color:#888; font-weight:normal">Prédiction Aviator Studio</small></div>
-                <div class="f-label">🕒 HEURE DU DÉPART</div>
-                <div class="f-input-wrap"><input type="text" id="av-h" class="f-input" placeholder="HH : MM"></div>
-                <div class="f-label">🎯 MULTIPLICATEUR CIBLE (+2.00)</div>
-                <div class="f-input-wrap"><input type="number" id="av-c" class="f-input" value="2.00"></div>
-                <button class="btn-main btn-av" onclick="calculate('aviator')">🔮 CALCULER</button>
-            </div>
-
-            <div id="form-cosmos" class="studio-card" style="display:none">
-                <div style="color:var(--cosmos); font-weight:900; margin-bottom:20px;">🚀 COSMOS X ⭐<br><small style="color:#888; font-weight:normal">Prédiction CosmosX Studio</small></div>
-                <div class="f-label">🎰 TOUR (6 CHIFFRES)</div>
-                <div class="f-input-wrap"><input type="number" id="co-tr" class="f-input" value="063291"></div>
-                <div class="f-label">🕒 HEURE EXACTE</div>
-                <div class="f-input-wrap"><input type="text" id="co-h" class="f-input" value="04:02:21"></div>
-                <div class="f-label">🎯 MULTIPLICATEUR (+2.00)</div>
-                <div class="f-input-wrap"><input type="number" id="co-c" class="f-input" value="2.71"></div>
-                <button class="btn-main btn-co" onclick="calculate('cosmos')">🚀 PRÉDICTION COSMOS X</button>
-            </div>
-
-            <div id="res-area" class="res-box">
-                <div style="font-size:0.7rem; color:#888; font-weight:800; text-transform:uppercase;">🚀 Indicateur des tours</div>
-                <div id="res-status" class="res-status"></div>
-                <div style="font-size:0.7rem; color:#999; font-weight:bold">✋ Heure prédite</div>
-                <div id="res-time" class="res-time">00:00:00</div>
-
-                <div id="res-cosmos-only" class="grid-2" style="display:none">
-                    <div class="box"><span>🎰 TOUR</span><b id="t1">---</b></div>
-                    <div class="box"><span>🎰 TOUR</span><b id="t2">---</b></div>
-                </div>
-                <div class="grid-2">
-                    <div class="box"><span>💸 PETIT GAIN</span><b id="g1" style="color:var(--green)">x0.00</b></div>
-                    <div class="box"><span>💰 GROS GAIN</span><b id="g2" style="color:var(--aviator)">x0.00</b></div>
-                </div>
-                
-                <div id="consigne" style="margin-top:15px; font-size:0.75rem; text-align:left; background:#fff5f5; padding:10px; border-radius:10px; border:1px solid #ffe3e3; display:none">
-                    <b>📋 CONSIGNE:</b> Miser après 1 bleu avant l'heure prédite.
-                </div>
-            </div>
-        </div>
+    <div class="tabs">
+        <button id="tab-av" class="tab active-av" onclick="switchMode('aviator')">✈️ AVIATOR</button>
+        <button id="tab-co" class="tab" onclick="switchMode('cosmos')">🚀 COSMOS X</button>
     </div>
 
-    <div id="hist-page" class="page">
-        <div class="container">
-            <h3 style="text-align:center">📜 Historique des Prédictions</h3>
-            <div id="hist-list"></div>
+    <div class="container">
+        <div id="form-aviator" class="studio-card">
+            <div style="color:var(--aviator); font-weight:900; margin-bottom:20px;">✈️ VERT RAIKA ⭐</div>
+            <div class="f-label">🕒 HEURE DU DÉPART</div>
+            <div class="f-input-wrap"><input type="text" id="av-h" class="f-input" placeholder="00 : 00 : 00"></div>
+            <div class="f-label">🎯 MULTIPLICATEUR CIBLE (+2.00)</div>
+            <div class="f-input-wrap"><input type="number" id="av-c" class="f-input" value="2.7"></div>
+            <button class="btn-main btn-av" onclick="calculateAviator()">🔮 CALCULER</button>
+        </div>
+
+        <div id="form-cosmos" class="studio-card" style="display:none">
+            <div style="color:var(--cosmos); font-weight:900; margin-bottom:20px;">🚀 COSMOS X ⭐</div>
+            <div class="f-label">🎰 TOUR (6 CHIFFRES)</div>
+            <div class="f-input-wrap"><input type="number" id="co-tr" class="f-input" value="063291"></div>
+            <button class="btn-main btn-co">🚀 PRÉDICTION COSMOS X</button>
+        </div>
+
+        <div id="res-aviator" class="res-box">
+            <span class="res-title">🖐️ HEURES PRÉDITES</span>
+            <ul class="h-predites-list">
+                <li><span>1.</span> <span id="h1">03:20:10</span></li>
+                <li><span>2.</span> <span id="h2">03:22:41</span></li>
+                <li><span>3.</span> <span id="h3">03:23:15</span></li>
+            </ul>
+
+            <div class="gain-row">
+                <span>👑</span>
+                <span class="gain-label">SÉCURITÉ DES MISES</span>
+                <b class="gain-val" style="color:var(--green)" id="av-g1">x3.55</b>
+            </div>
+            <div class="gain-row">
+                <span>💸</span>
+                <span class="gain-label">AFAKA TENTENA TSARA @2EM MISE</span>
+                <b class="gain-val" style="color:var(--aviator)" id="av-g2">x5.19</b>
+            </div>
+            <div class="gain-row">
+                <span>💰</span>
+                <span class="gain-label">TENTEO RAHA EFA MBA GAIN ANAO</span>
+                <b class="gain-val" style="color:var(--green)" id="av-g3">x156.92</b>
+            </div>
         </div>
     </div>
 
     <nav>
-        <button class="n-btn" onclick="showPage('home')">🏠</button>
+        <button class="n-btn">🏠</button>
         <button class="n-btn" style="color:var(--aviator)">🎯</button>
-        <button class="n-btn" onclick="showPage('hist')">📜</button>
+        <button class="n-btn">📜</button>
     </nav>
 </div>
 
 <script>
-    let currentMode = 'aviator';
-    let historyData = [];
-
-    // Live Clock
     setInterval(() => {
         document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0];
     }, 1000);
 
-    // Theme Toggle
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        document.getElementById('theme-btn').innerText = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-    }
-
-    function showPage(p) {
-        document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page'));
-        document.getElementById(p + '-page').classList.add('active-page');
-        if(p === 'hist') renderHistory();
-    }
-
     function switchMode(m) {
-        currentMode = m;
         document.getElementById('form-aviator').style.display = m === 'aviator' ? 'block' : 'none';
         document.getElementById('form-cosmos').style.display = m === 'cosmos' ? 'block' : 'none';
         document.getElementById('tab-av').className = m === 'aviator' ? 'tab active-av' : 'tab';
         document.getElementById('tab-co').className = m === 'cosmos' ? 'tab active-co' : 'tab';
-        document.getElementById('res-area').style.display = 'none';
+        document.getElementById('res-aviator').style.display = 'none';
     }
 
-    function calculate(type) {
-        const res = document.getElementById('res-area');
-        const rand = Math.random();
-        res.style.display = 'block';
-
-        // Time Calc
+    function calculateAviator() {
+        document.getElementById('res-aviator').style.display = 'block';
         const now = new Date();
-        now.setMinutes(now.getMinutes() + Math.floor(rand * 5) + 2);
-        const timeStr = now.toTimeString().split(' ')[0];
-        document.getElementById('res-time').innerText = timeStr;
+        
+        // Famoronana lera 3 samy hafa
+        const t1 = new Date(now.getTime() + 2*60000);
+        const t2 = new Date(now.getTime() + 4*60000);
+        const t3 = new Date(now.getTime() + 5*60000);
 
-        // Gains
-        const petit = (1.5 + rand * 3).toFixed(2);
-        const gros = (15 + rand * 40).toFixed(2);
-        document.getElementById('g1').innerText = "x" + petit;
-        document.getElementById('g2').innerText = "x" + gros;
+        document.getElementById('h1').innerText = t1.toTimeString().split(' ')[0];
+        document.getElementById('h2').innerText = t2.toTimeString().split(' ')[0];
+        document.getElementById('h3').innerText = t3.toTimeString().split(' ')[0];
 
-        let statusTxt = "";
-        let statusCol = "";
-
-        if(type === 'aviator') {
-            document.getElementById('res-cosmos-only').style.display = 'none';
-            document.getElementById('consigne').style.display = 'none';
-            statusTxt = rand > 0.3 ? "TOUR TSARA ✈️" : "TOUR RATSY 💔";
-            statusCol = rand > 0.3 ? "var(--green)" : "var(--aviator)";
-        } else {
-            document.getElementById('res-cosmos-only').style.display = 'grid';
-            document.getElementById('consigne').style.display = 'block';
-            const trBase = parseInt(document.getElementById('co-tr').value) || 63000;
-            document.getElementById('t1').innerText = trBase + 14;
-            document.getElementById('t2').innerText = trBase + 15;
-            statusTxt = "TOUR TSARA 🚀";
-            statusCol = "var(--green)";
-        }
-
-        document.getElementById('res-status').innerText = statusTxt;
-        document.getElementById('res-status').style.color = statusCol;
-
-        // Save to Hist
-        historyData.unshift({ type, statusTxt, timeStr, petit, gros, date: new Date().toLocaleTimeString() });
-        res.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function renderHistory() {
-        const list = document.getElementById('hist-list');
-        list.innerHTML = historyData.length ? historyData.map(h => `
-            <div class="hist-item" style="border-left-color: ${h.type==='aviator'?'#d32f2f':'#f39c12'}">
-                <b style="color:${h.type==='aviator'?'#d32f2f':'#f39c12'}">${h.type.toUpperCase()}</b> - ${h.date}<br>
-                Status: ${h.statusTxt} | Lera: ${h.timeStr}<br>
-                Gains: x${h.petit} / x${h.gros}
-            </div>
-        `).join('') : "<p style='text-align:center'>Tsy mbola misy tantara.</p>";
+        // Gain kisendrasendra ohatra ny amin'ny sary
+        document.getElementById('av-g1').innerText = "x" + (2 + Math.random()*2).toFixed(2);
+        document.getElementById('av-g2').innerText = "x" + (5 + Math.random()*5).toFixed(2);
+        document.getElementById('av-g3').innerText = "x" + (100 + Math.random()*100).toFixed(2);
+        
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 </script>
 </body>
