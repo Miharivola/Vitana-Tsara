@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - VITANA TSARA V33</title>
+    <title>Mandroka Vola - VITANA TSARA V35</title>
     <style>
+        /* 1. STYLES & VARIABLES - TSY NIOVA NY POZINY */
         :root { --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef; --aviator: #d32f2f; --cosmos: #f39c12; --green: #28a745; --border: #dee2e6; --shadow: rgba(0,0,0,0.05); }
         body.dark-mode { --bg: #121212; --card: #1e1e1e; --text: #ffffff; --input-bg: #2d2d2d; --border: #333; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; transition: 0.3s; }
         .app { width: 100%; max-width: 450px; min-height: 100vh; position: relative; padding-bottom: 80px; }
+        
+        /* Header & Tabs */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); }
         .n-btn { background: var(--input-bg); border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: var(--text); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
         .tabs { display: flex; padding: 10px 15px; gap: 10px; }
         .tab { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; background: var(--input-bg); color: #777; }
         .tab.active-av { background: var(--card); border: 1px solid var(--border); color: var(--aviator); }
         .tab.active-co { background: var(--cosmos); color: white; }
+
+        /* Form & Cards */
         .container { padding: 15px; }
         .studio-card { background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid var(--border); margin-bottom: 20px; text-align: center; }
         .f-label { display: block; text-align: center; font-size: 0.75rem; font-weight: 800; color: #888; margin-bottom: 8px; text-transform: uppercase; }
         .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); }
         .f-input { width: 100%; border: none; background: transparent; font-size: 1.3rem; font-family: monospace; text-align: center; outline: none; font-weight: bold; color: var(--green); }
         .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; background: linear-gradient(90deg, #b71c1c, #2e7d32); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        
+        /* Results UI */
         .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 10px; text-align: center; }
         .res-list { list-style: none; padding: 0; margin: 10px 0; }
         .res-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin-bottom: 5px; }
@@ -29,6 +36,8 @@
         .gain-row { display: flex; justify-content: space-between; align-items: center; background: #eeeeee; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.75rem; font-weight: bold; text-align: left; }
         .gain-val { color: var(--green); font-size: 1rem; font-family: monospace; }
         .consigne-box { border: 1px solid var(--border); padding: 10px; border-radius: 12px; font-size: 0.75rem; margin-top: 15px; background: rgba(255,255,255,0.5); }
+        
+        /* Clock & Historique Card */
         .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
         .hist-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); position: relative; }
         .hist-tag { background: #f1f3f5; display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; color: #666; margin-bottom: 12px; }
@@ -36,13 +45,17 @@
         .hist-val { font-weight: bold; font-family: monospace; }
         .hist-gains { display: flex; gap: 15px; font-weight: 900; font-family: monospace; font-size: 0.95rem; }
         .trash-btn { position: absolute; right: 15px; top: 15px; color: #add8e6; cursor: pointer; border: none; background: none; font-size: 1.1rem; }
+        
+        /* Navigation */
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); }
         .page { display: none; } .active-page { display: block; }
     </style>
 </head>
 <body id="main-body">
+
 <div class="app">
     <div class="f-clock" id="live-clock">00:00:00</div>
+    
     <div class="header">
         <div style="font-weight:bold; color:#555;">👤 VITANA TSARA</div>
         <div class="nav-icons">
@@ -51,11 +64,13 @@
             <button class="n-btn" onclick="showPage('hist')">📜</button>
         </div>
     </div>
+
     <div id="home-page" class="page active-page">
         <div class="tabs">
             <button id="tab-av" class="tab active-av" onclick="switchMode('aviator')">✈️ AVIATOR</button>
             <button id="tab-co" class="tab" onclick="switchMode('cosmos')">🚀 COSMOS X</button>
         </div>
+
         <div class="container">
             <div id="form-aviator" class="studio-card">
                 <div style="color:#888; font-weight:800; margin-bottom:15px; font-size:0.8rem;">Prédicton Aviator Studio</div>
@@ -65,6 +80,7 @@
                 <div class="f-input-wrap"><input type="number" id="av-c-in" class="f-input" value="11.76"></div>
                 <button class="btn-calc" onclick="calculateAviator()">🔮 CALCULER</button>
             </div>
+
             <div id="form-cosmos" class="studio-card" style="display:none">
                 <div style="color:#888; font-weight:800; margin-bottom:15px; font-size: 0.8rem;">Prédicton CosmosX Studio</div>
                 <label class="f-label">🎰 DERNIERS CHIFFRES DU TOUR</label>
@@ -108,11 +124,19 @@
             </div>
         </div>
     </div>
-    <div id="hist-page" class="page"><div class="container" id="hist-list"></div></div>
-    <nav><button class="n-btn" onclick="showPage('home')">🏠</button><button class="n-btn" onclick="showPage('hist')">📜</button></nav>
+
+    <div id="hist-page" class="page">
+        <div class="container" id="hist-list"></div>
+    </div>
+
+    <nav>
+        <button class="n-btn" onclick="showPage('home')">🏠</button>
+        <button class="n-btn" onclick="showPage('hist')">📜</button>
+    </nav>
 </div>
 
 <script>
+    // 2. SCRIPTS & LOGIQUE ALGORITHM (VOADIO)
     let historyData = [];
     setInterval(() => { document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0]; }, 1000);
     
@@ -131,53 +155,48 @@
         document.getElementById('res-cosmos').style.display = 'none';
     }
 
-    // Matihanina AI Algorithm ho an'ny Aviator
+    // ALGORITHM AVIATOR LOGIQUE (SEED-BASED)
     function calculateAviator() {
-        const entry = document.getElementById('av-h-in').value || new Date().toLocaleTimeString();
+        const entry = document.getElementById('av-h-in').value || new Date().toTimeString().split(' ')[0];
         const target = parseFloat(document.getElementById('av-c-in').value) || 2.0;
         
-        // Pseudo-random matihanina mampiasa seed avy amin'ny heure
-        const seed = parseInt(entry.split(':').join('')) % 100;
+        const seed = entry.split(':').reduce((a, b) => parseInt(a) + parseInt(b), 0);
         const now = new Date();
         
-        const h1 = new Date(now.getTime() + (2 * 60000) + (seed * 1000));
-        const h2 = new Date(h1.getTime() + (3 * 60000));
-        const h3 = new Date(h2.getTime() + (2.5 * 60000));
+        const h1 = new Date(now.getTime() + 120000 + (seed * 100));
+        const h2 = new Date(h1.getTime() + 180000);
+        const h3 = new Date(h2.getTime() + 240000);
 
         document.getElementById('av-h1').innerText = h1.toTimeString().split(' ')[0];
         document.getElementById('av-h2').innerText = h2.toTimeString().split(' ')[0];
         document.getElementById('av-h3').innerText = h3.toTimeString().split(' ')[0];
 
-        const g1 = (target * 0.23).toFixed(2), g2 = (target * 0.29).toFixed(2), g3 = (target * 13.2).toFixed(2);
+        const g1 = (target * 0.21).toFixed(2), g2 = (target * 0.38).toFixed(2), g3 = (target * 12.85).toFixed(2);
         document.getElementById('av-g1').innerText = "x" + g1;
         document.getElementById('av-g2').innerText = "x" + g2;
         document.getElementById('av-g3').innerText = "x" + g3;
 
         document.getElementById('res-aviator').style.display = 'block';
-        historyData.unshift({ type: 'Aviator', entry, pred: h1.toTimeString().split(' ')[0], g1, g2, g3, date: new Date().toLocaleString() });
+        saveToHistory('Aviator', entry, h1.toTimeString().split(' ')[0], g1, g2, g3);
     }
 
-    // Matihanina AI Algorithm ho an'ny Cosmos X
+    // ALGORITHM COSMOS X LOGIQUE
     function calculateCosmos() {
         const tr = parseInt(document.getElementById('co-tr-in').value) || 262;
-        const entry = document.getElementById('co-h-in').value || new Date().toLocaleTimeString();
+        const entry = document.getElementById('co-h-in').value || new Date().toTimeString().split(' ')[0];
         const target = parseFloat(document.getElementById('co-c-in').value) || 2.8;
 
-        // Algorithm miorina amin'ny tours modulo 10
         const factor = (tr % 10) + 1;
         const now = new Date();
-        
-        const h1 = new Date(now.getTime() + (130000) + (factor * 5000));
-        const h2 = new Date(h1.getTime() + (85000));
-        const h3 = new Date(h2.getTime() + (110000));
+        const h1 = new Date(now.getTime() + 130000 + (factor * 2000));
 
         document.getElementById('co-h1').innerText = h1.toTimeString().split(' ')[0];
-        document.getElementById('co-h2').innerText = h2.toTimeString().split(' ')[0];
-        document.getElementById('co-h3').innerText = h3.toTimeString().split(' ')[0];
+        document.getElementById('co-h2').innerText = new Date(h1.getTime() + 85000).toTimeString().split(' ')[0];
+        document.getElementById('co-h3').innerText = new Date(h1.getTime() + 170000).toTimeString().split(' ')[0];
 
-        document.getElementById('co-t1').innerText = tr + (factor);
-        document.getElementById('co-t2').innerText = tr + (factor + 2);
-        document.getElementById('co-t3').innerText = tr + (factor + 6);
+        document.getElementById('co-t1').innerText = tr + factor;
+        document.getElementById('co-t2').innerText = tr + factor + 2;
+        document.getElementById('co-t3').innerText = tr + factor + 5;
 
         const g1 = (target * 0.74).toFixed(2), g2 = (target * 4.38).toFixed(2), g3 = (target * 13.84).toFixed(2);
         document.getElementById('co-g1').innerText = "x" + g1;
@@ -185,7 +204,11 @@
         document.getElementById('co-g3').innerText = "x" + g3;
 
         document.getElementById('res-cosmos').style.display = 'block';
-        historyData.unshift({ type: 'Cosmos', entry, pred: h1.toTimeString().split(' ')[0], g1, g2, g3, date: new Date().toLocaleString() });
+        saveToHistory('Cosmos', entry, h1.toTimeString().split(' ')[0], g1, g2, g3);
+    }
+
+    function saveToHistory(type, entry, pred, g1, g2, g3) {
+        historyData.unshift({ type, entry, pred, g1, g2, g3 });
     }
 
     function renderHistory() {
@@ -209,5 +232,6 @@
 
     function deleteHist(i) { historyData.splice(i, 1); renderHistory(); }
 </script>
+
 </body>
 </html>
