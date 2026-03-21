@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - VITANA TSARA V32</title>
+    <title>Mandroka Vola - VITANA TSARA V33</title>
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef; --aviator: #d32f2f; --cosmos: #f39c12; --green: #28a745; --border: #dee2e6; --shadow: rgba(0,0,0,0.05); }
         body.dark-mode { --bg: #121212; --card: #1e1e1e; --text: #ffffff; --input-bg: #2d2d2d; --border: #333; }
@@ -21,18 +21,6 @@
         .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); }
         .f-input { width: 100%; border: none; background: transparent; font-size: 1.3rem; font-family: monospace; text-align: center; outline: none; font-weight: bold; color: var(--green); }
         .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; background: linear-gradient(90deg, #b71c1c, #2e7d32); display: flex; align-items: center; justify-content: center; gap: 10px; }
-        
-        /* HISTORIQUE DESIGN (AVERINA ARAKA NY SARY) */
-        .hist-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); position: relative; box-shadow: 0 2px 5px var(--shadow); }
-        .hist-tag { background: #f1f3f5; display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; color: #666; margin-bottom: 12px; }
-        .hist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; }
-        .hist-label { color: #888; margin-right: 5px; }
-        .hist-val { font-weight: bold; font-family: monospace; }
-        .hist-gains { display: flex; gap: 15px; font-weight: 900; font-family: monospace; font-size: 0.95rem; }
-        .hist-time-stamp { font-size: 0.7rem; color: #aaa; margin-top: 10px; }
-        .trash-btn { position: absolute; right: 15px; top: 15px; color: #add8e6; cursor: pointer; border: none; background: none; font-size: 1.1rem; }
-
-        /* COSMOS & AVIATOR RESULTS */
         .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 10px; text-align: center; }
         .res-list { list-style: none; padding: 0; margin: 10px 0; }
         .res-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin-bottom: 5px; }
@@ -42,6 +30,12 @@
         .gain-val { color: var(--green); font-size: 1rem; font-family: monospace; }
         .consigne-box { border: 1px solid var(--border); padding: 10px; border-radius: 12px; font-size: 0.75rem; margin-top: 15px; background: rgba(255,255,255,0.5); }
         .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
+        .hist-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); position: relative; }
+        .hist-tag { background: #f1f3f5; display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; color: #666; margin-bottom: 12px; }
+        .hist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; }
+        .hist-val { font-weight: bold; font-family: monospace; }
+        .hist-gains { display: flex; gap: 15px; font-weight: 900; font-family: monospace; font-size: 0.95rem; }
+        .trash-btn { position: absolute; right: 15px; top: 15px; color: #add8e6; cursor: pointer; border: none; background: none; font-size: 1.1rem; }
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); }
         .page { display: none; } .active-page { display: block; }
     </style>
@@ -98,29 +92,23 @@
             <div id="res-cosmos" class="res-box">
                 <span class="f-label" style="margin-bottom:10px;">🖐️ HEURES PRÉDITES</span>
                 <ul class="res-list">
-                    <li><span style="color:#888; font-size:0.9rem;">1.</span> <b id="co-h1" style="color:var(--green)">22:51:03</b></li>
-                    <li><span style="color:#888; font-size:0.9rem;">2.</span> <b id="co-h2" style="color:var(--green)">22:52:24</b></li>
-                    <li><span style="color:#888; font-size:0.9rem;">3.</span> <b id="co-h3" style="color:var(--green)">22:53:32</b></li>
+                    <li><span style="color:#888; font-size:0.9rem;">1.</span> <b id="co-h1" style="color:var(--green)">--:--:--</b></li>
+                    <li><span style="color:#888; font-size:0.9rem;">2.</span> <b id="co-h2" style="color:var(--green)">--:--:--</b></li>
+                    <li><span style="color:#888; font-size:0.9rem;">3.</span> <b id="co-h3" style="color:var(--green)">--:--:--</b></li>
                 </ul>
                 <span class="f-label" style="margin-top:15px;">🎰 TOURS PRÉDITS</span>
                 <div class="tours-predits">
-                    <div class="tour-box" id="co-t1">269</div>
-                    <div class="tour-box" id="co-t2">271</div>
-                    <div class="tour-box" id="co-t3">275</div>
+                    <div class="tour-box" id="co-t1">---</div>
+                    <div class="tour-box" id="co-t2">---</div>
+                    <div class="tour-box" id="co-t3">---</div>
                 </div>
-                <div class="gain-row"><span>👑 SÉCURITÉ DES MISES</span><span class="gain-val" id="co-g1">x2.08</span></div>
-                <div class="gain-row"><span>💵 AFAKA TENTENA TSARA @2EM MISE</span><span class="gain-val" id="co-g2" style="color:var(--aviator)">x12.26</span></div>
-                <div class="gain-row"><span>💰 TENTEO RAHA EFA MBA GAIN ANAO</span><span class="gain-val" id="co-g3">x38.76</span></div>
+                <div class="gain-row"><span>👑 SÉCURITÉ DES MISES</span><span class="gain-val" id="co-g1">x0.00</span></div>
+                <div class="gain-row"><span>💵 AFAKA TENTENA TSARA @2EM MISE</span><span class="gain-val" id="co-g2" style="color:var(--aviator)">x0.00</span></div>
+                <div class="gain-row"><span>💰 TENTEO RAHA EFA MBA GAIN ANAO</span><span class="gain-val" id="co-g3">x0.00</span></div>
             </div>
         </div>
     </div>
-
-    <div id="hist-page" class="page">
-        <div class="container">
-            <div id="hist-list"></div>
-        </div>
-    </div>
-
+    <div id="hist-page" class="page"><div class="container" id="hist-list"></div></div>
     <nav><button class="n-btn" onclick="showPage('home')">🏠</button><button class="n-btn" onclick="showPage('hist')">📜</button></nav>
 </div>
 
@@ -143,31 +131,61 @@
         document.getElementById('res-cosmos').style.display = 'none';
     }
 
+    // Matihanina AI Algorithm ho an'ny Aviator
     function calculateAviator() {
-        const entry = document.getElementById('av-h-in').value || "00:00:00";
+        const entry = document.getElementById('av-h-in').value || new Date().toLocaleTimeString();
         const target = parseFloat(document.getElementById('av-c-in').value) || 2.0;
-        document.getElementById('res-aviator').style.display = 'block';
-        const pred = new Date(Date.now() + 120000).toTimeString().split(' ')[0];
         
-        document.getElementById('av-h1').innerText = pred;
-        document.getElementById('av-h2').innerText = new Date(Date.now() + 300000).toTimeString().split(' ')[0];
-        document.getElementById('av-h3').innerText = new Date(Date.now() + 450000).toTimeString().split(' ')[0];
+        // Pseudo-random matihanina mampiasa seed avy amin'ny heure
+        const seed = parseInt(entry.split(':').join('')) % 100;
+        const now = new Date();
         
-        const g1 = (target * 0.25).toFixed(2), g2 = (target * 0.65).toFixed(2), g3 = (target * 12.5).toFixed(2);
+        const h1 = new Date(now.getTime() + (2 * 60000) + (seed * 1000));
+        const h2 = new Date(h1.getTime() + (3 * 60000));
+        const h3 = new Date(h2.getTime() + (2.5 * 60000));
+
+        document.getElementById('av-h1').innerText = h1.toTimeString().split(' ')[0];
+        document.getElementById('av-h2').innerText = h2.toTimeString().split(' ')[0];
+        document.getElementById('av-h3').innerText = h3.toTimeString().split(' ')[0];
+
+        const g1 = (target * 0.23).toFixed(2), g2 = (target * 0.29).toFixed(2), g3 = (target * 13.2).toFixed(2);
         document.getElementById('av-g1').innerText = "x" + g1;
         document.getElementById('av-g2').innerText = "x" + g2;
         document.getElementById('av-g3').innerText = "x" + g3;
 
-        historyData.unshift({ type: 'Aviator', entry, pred, g1, g2, g3, date: new Date().toLocaleString() });
+        document.getElementById('res-aviator').style.display = 'block';
+        historyData.unshift({ type: 'Aviator', entry, pred: h1.toTimeString().split(' ')[0], g1, g2, g3, date: new Date().toLocaleString() });
     }
 
+    // Matihanina AI Algorithm ho an'ny Cosmos X
     function calculateCosmos() {
-        const entry = document.getElementById('co-h-in').value || "00:00:00";
+        const tr = parseInt(document.getElementById('co-tr-in').value) || 262;
+        const entry = document.getElementById('co-h-in').value || new Date().toLocaleTimeString();
         const target = parseFloat(document.getElementById('co-c-in').value) || 2.8;
-        document.getElementById('res-cosmos').style.display = 'block';
-        const pred = new Date(Date.now() + 130000).toTimeString().split(' ')[0];
+
+        // Algorithm miorina amin'ny tours modulo 10
+        const factor = (tr % 10) + 1;
+        const now = new Date();
         
-        historyData.unshift({ type: 'Cosmos', entry, pred, g1: "2.08", g2: "12.26", g3: "38.76", date: new Date().toLocaleString() });
+        const h1 = new Date(now.getTime() + (130000) + (factor * 5000));
+        const h2 = new Date(h1.getTime() + (85000));
+        const h3 = new Date(h2.getTime() + (110000));
+
+        document.getElementById('co-h1').innerText = h1.toTimeString().split(' ')[0];
+        document.getElementById('co-h2').innerText = h2.toTimeString().split(' ')[0];
+        document.getElementById('co-h3').innerText = h3.toTimeString().split(' ')[0];
+
+        document.getElementById('co-t1').innerText = tr + (factor);
+        document.getElementById('co-t2').innerText = tr + (factor + 2);
+        document.getElementById('co-t3').innerText = tr + (factor + 6);
+
+        const g1 = (target * 0.74).toFixed(2), g2 = (target * 4.38).toFixed(2), g3 = (target * 13.84).toFixed(2);
+        document.getElementById('co-g1').innerText = "x" + g1;
+        document.getElementById('co-g2').innerText = "x" + g2;
+        document.getElementById('co-g3').innerText = "x" + g3;
+
+        document.getElementById('res-cosmos').style.display = 'block';
+        historyData.unshift({ type: 'Cosmos', entry, pred: h1.toTimeString().split(' ')[0], g1, g2, g3, date: new Date().toLocaleString() });
     }
 
     function renderHistory() {
@@ -175,19 +193,18 @@
         list.innerHTML = historyData.length ? historyData.map((h, i) => `
             <div class="hist-card">
                 <button class="trash-btn" onclick="deleteHist(${i})">🗑️</button>
-                <div class="hist-tag">✈️ ${h.type}</div>
+                <div class="hist-tag">${h.type === 'Aviator' ? '✈️' : '🚀'} ${h.type}</div>
                 <div class="hist-grid">
-                    <div><span class="hist-label">Entrée:</span><span class="hist-val" style="color:var(--green)">${h.entry}</span></div>
-                    <div><span class="hist-label">Prédite:</span><span class="hist-val" style="color:var(--green)">${h.pred}</span></div>
+                    <div><span style="color:#888">Entrée:</span> <span class="hist-val" style="color:var(--green)">${h.entry}</span></div>
+                    <div><span style="color:#888">Prédite:</span> <span class="hist-val" style="color:var(--green)">${h.pred}</span></div>
                 </div>
                 <div class="hist-gains">
                     <span style="color:var(--cosmos)">👑x${h.g1}</span>
                     <span style="color:var(--green)">💸x${h.g2}</span>
                     <span style="color:var(--cosmos)">💰x${h.g3}</span>
                 </div>
-                <div class="hist-time-stamp">${h.date}</div>
             </div>
-        `).join('') : "<p style='text-align:center; color:#888;'>Tsy misy tantara.</p>";
+        `).join('') : "<p style='text-align:center; color:#888; padding-top:20px;'>Tsy misy tantara.</p>";
     }
 
     function deleteHist(i) { historyData.splice(i, 1); renderHistory(); }
