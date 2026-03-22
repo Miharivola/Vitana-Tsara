@@ -3,31 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - ALGORITHM PRO V39</title>
+    <title>Mandroka Vola - ALGORITHM FINAL V40</title>
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef; --aviator: #d32f2f; --cosmos: #f39c12; --green: #28a745; --border: #dee2e6; }
         body.dark-mode { --bg: #121212; --card: #1e1e1e; --text: #ffffff; --input-bg: #2d2d2d; --border: #333; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; transition: 0.3s; padding-bottom: 80px; }
         .app { width: 100%; max-width: 450px; min-height: 100vh; position: relative; }
+        
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); }
         .n-btn { background: var(--input-bg); border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: var(--text); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
+        
         .tabs { display: flex; padding: 10px 15px; gap: 10px; }
         .tab { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; background: var(--input-bg); color: #777; }
         .tab.active-av { background: var(--card); border: 1px solid var(--border); color: var(--aviator); }
         .tab.active-co { background: var(--cosmos); color: white; }
+
         .container { padding: 15px; }
         .studio-card { background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid var(--border); margin-bottom: 20px; text-align: center; }
         .f-label { display: block; text-align: center; font-size: 0.75rem; font-weight: 800; color: #888; margin-bottom: 8px; text-transform: uppercase; }
         .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); }
         .f-input { width: 100%; border: none; background: transparent; font-size: 1.3rem; font-family: monospace; text-align: center; outline: none; font-weight: bold; color: var(--green); }
+        
         .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; background: linear-gradient(90deg, #b71c1c, #2e7d32); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        
         .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 10px; text-align: center; }
         .res-list { list-style: none; padding: 0; margin: 10px 0; }
         .res-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin-bottom: 5px; }
+        
+        /* Tours Predits Style */
+        .tours-container { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
+        .tour-item { background: #f1f3f5; padding: 10px 15px; border-radius: 10px; font-weight: bold; border: 1px solid #ddd; }
+        body.dark-mode .tour-item { background: #2d2d2d; border-color: #444; }
+
         .gain-row { display: flex; justify-content: space-between; align-items: center; background: #eeeeee; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.75rem; font-weight: bold; text-align: left; }
+        body.dark-mode .gain-row { background: #2d2d2d; }
         .gain-val { color: var(--green); font-size: 1rem; font-family: monospace; }
-        .hist-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); position: relative; }
-        .trash-btn { position: absolute; right: 15px; top: 15px; color: #ff5252; cursor: pointer; border: none; background: none; }
+        
         .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); }
         .page { display: none; } .active-page { display: block; }
@@ -57,25 +68,37 @@
                 <label class="f-label">🕒 HEURE DU DÉPART</label>
                 <div class="f-input-wrap"><input type="text" id="av-h-in" class="f-input" placeholder="18:20:00"></div>
                 <label class="f-label">🎯 MULTIPLICATEUR CIBLE</label>
-                <div class="f-input-wrap"><input type="number" id="av-c-in" class="f-input" value="3.00"></div>
-                <button class="btn-calc" onclick="calculateAviator()">🔮 CALCULER</button>
+                <div class="f-input-wrap"><input type="number" id="av-c-in" class="f-input" value="11.76"></div>
+                <button class="btn-calc" onclick="calculate('av')">🔮 CALCULER</button>
             </div>
 
             <div id="form-cosmos" class="studio-card" style="display:none">
+                <label class="f-label">🎰 DERNIERS CHIFFRES DU TOUR</label>
+                <div class="f-input-wrap"><input type="number" id="co-tr-in" class="f-input" placeholder="262"></div>
                 <label class="f-label">🕒 HEURE EXACTE</label>
                 <div class="f-input-wrap"><input type="text" id="co-h-in" class="f-input" placeholder="06:16:00"></div>
                 <label class="f-label">🎯 MULTIPLICATEUR (+2.00)</label>
                 <div class="f-input-wrap"><input type="number" id="co-c-in" class="f-input" value="2.80"></div>
-                <button class="btn-calc" onclick="calculateCosmos()">🚀 PRÉDICTION COSMOS X</button>
+                <button class="btn-calc" onclick="calculate('co')">🚀 PRÉDICTION COSMOS X</button>
             </div>
 
             <div id="res-box" class="res-box">
-                <span class="f-label" style="margin-bottom:10px;">🖐️ HEURES PRÉDITES</span>
+                <span class="f-label" id="res-title">🖐️ HEURES PRÉDITES</span>
                 <ul class="res-list">
-                    <li><b id="h1">--:--:--</b></li>
-                    <li><b id="h2">--:--:--</b></li>
-                    <li><b id="h3">--:--:--</b></li>
+                    <li><b id="h1" style="color:var(--green)">--:--:--</b></li>
+                    <li><b id="h2" style="color:var(--green)">--:--:--</b></li>
+                    <li><b id="h3" style="color:var(--green)">--:--:--</b></li>
                 </ul>
+
+                <div id="tours-section" style="display:none">
+                    <span class="f-label">🎰 TOURS PRÉDITS</span>
+                    <div class="tours-container">
+                        <div class="tour-item" id="t1">---</div>
+                        <div class="tour-item" id="t2">---</div>
+                        <div class="tour-item" id="t3">---</div>
+                    </div>
+                </div>
+
                 <div class="gain-row"><span>👑 SÉCURITÉ</span><span class="gain-val" id="g1">x0.00</span></div>
                 <div class="gain-row"><span>💸 TENTENA</span><span class="gain-val" id="g2">x0.00</span></div>
                 <div class="gain-row"><span>💰 GAIN</span><span class="gain-val" id="g3">x0.00</span></div>
@@ -94,7 +117,6 @@
     function showPage(p) {
         document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page'));
         document.getElementById(p + '-page').classList.add('active-page');
-        if(p === 'hist') renderHistory();
     }
 
     function switchMode(m) {
@@ -105,64 +127,49 @@
         document.getElementById('res-box').style.display = 'none';
     }
 
-    // ALGORITHM DYNAMIQUE & LOGIQUE
-    function solve(type) {
-        const inputH = type === 'av' ? document.getElementById('av-h-in').value : document.getElementById('co-h-in').value;
+    function calculate(type) {
+        const hIn = type === 'av' ? document.getElementById('av-h-in').value : document.getElementById('co-h-in').value;
         const target = parseFloat(type === 'av' ? document.getElementById('av-c-in').value : document.getElementById('co-c-in').value) || 2.0;
-        
-        const now = new Date();
-        const pts = (inputH || now.toLocaleTimeString()).split(':');
+        const trBase = parseInt(document.getElementById('co-tr-in').value) || 0;
+
+        const pts = (hIn || new Date().toLocaleTimeString()).split(':');
         const mm = parseInt(pts[1]) || 0; const ss = parseInt(pts[2]) || 0;
 
-        // 1. Segondra tsy mitovy (Dynamique)
-        const s1 = (ss + 15) % 60;
-        const s2 = (s1 + 25) % 60;
-        const s3 = (s2 + 20) % 60;
+        // ALGORITHM DYNAMIQUE
+        const s1 = (ss + 12) % 60;
+        const s2 = (s1 + 22) % 60;
+        const s3 = (s2 + 18) % 60;
 
-        const d1 = new Date(now.getTime() + 120000); d1.setSeconds(s1);
-        const d2 = new Date(d1.getTime() + 180000); d2.setSeconds(s2);
-        const d3 = new Date(d2.getTime() + 240000); d3.setSeconds(s3);
-
-        const h1 = d1.toTimeString().split(' ')[0];
-        const h2 = d2.toTimeString().split(' ')[0];
-        const h3 = d3.toTimeString().split(' ')[0];
-
-        // 2. Multiplicateur Lojika (Tsy ambany intsony)
-        // Sécurité = 60% hatramin'ny 85% an'ny target (fa tsy latsaky ny 1.20)
-        const g1 = Math.max(1.25, (target * (0.6 + (ss/200)))).toFixed(2);
-        // Tentena = manodidina ny target
-        const g2 = (target * (0.9 + (mm/300))).toFixed(2);
-        // Gain = Target ampiana "boost" be dia be
-        const g3 = (target * (10 + (ss % 15))).toFixed(2);
+        const d1 = new Date(); d1.setSeconds(s1);
+        const h1 = d1.toLocaleTimeString();
+        const h2 = new Date(d1.getTime() + 155000).toLocaleTimeString();
+        const h3 = new Date(d1.getTime() + 310000).toLocaleTimeString();
 
         document.getElementById('h1').innerText = h1;
         document.getElementById('h2').innerText = h2;
         document.getElementById('h3').innerText = h3;
+
+        // KAJY NY GAIN (MATANJAKA)
+        const g1 = Math.max(1.30, (target * 0.75)).toFixed(2);
+        const g2 = (target * 1.15).toFixed(2);
+        const g3 = (target * (15 + (ss % 10))).toFixed(2);
+
         document.getElementById('g1').innerText = "x" + g1;
         document.getElementById('g2').innerText = "x" + g2;
         document.getElementById('g3').innerText = "x" + g3;
+
+        // ALGORITHM TOUR (COSMOS X IHANY)
+        if(type === 'co') {
+            document.getElementById('tours-section').style.display = 'block';
+            document.getElementById('t1').innerText = trBase + (ss % 5) + 3;
+            document.getElementById('t2').innerText = trBase + (ss % 5) + 11;
+            document.getElementById('t3').innerText = trBase + (ss % 5) + 19;
+        } else {
+            document.getElementById('tours-section').style.display = 'none';
+        }
+
         document.getElementById('res-box').style.display = 'block';
-
-        historyData.unshift({ type, h1, g1, g2, g3, time: new Date().toLocaleTimeString() });
     }
-
-    function calculateAviator() { solve('av'); }
-    function calculateCosmos() { solve('co'); }
-
-    function renderHistory() {
-        const list = document.getElementById('hist-list');
-        list.innerHTML = historyData.length ? historyData.map((h, i) => `
-            <div class="hist-card">
-                <button class="trash-btn" onclick="deleteHist(${i})">🗑️</button>
-                <div style="font-weight:bold; color:#888; font-size:0.7rem; margin-bottom:5px;">${h.type === 'av' ? '✈️ AVIATOR' : '🚀 COSMOS'} - ${h.time}</div>
-                <div style="font-size:1.2rem; font-weight:bold; color:var(--green); font-family:monospace;">${h.h1}</div>
-                <div style="display:flex; gap:10px; margin-top:5px; font-weight:bold; font-family:monospace;">
-                    <span style="color:var(--cosmos)">x${h.g1}</span> <span style="color:var(--green)">x${h.g2}</span> <span style="color:var(--aviator)">x${h.g3}</span>
-                </div>
-            </div>
-        `).join('') : "Tsy misy tantara.";
-    }
-    function deleteHist(i) { historyData.splice(i, 1); renderHistory(); }
 </script>
 </body>
 </html>
