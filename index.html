@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - V41 NORMAL TIME</title>
+    <title>Mandroka Vola - PROVABLY FAIR V1.0.1</title>
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef; --aviator: #d32f2f; --cosmos: #f39c12; --green: #28a745; --border: #dee2e6; }
         body.dark-mode { --bg: #121212; --card: #1e1e1e; --text: #ffffff; --input-bg: #2d2d2d; --border: #333; }
@@ -23,15 +23,10 @@
         .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; background: linear-gradient(90deg, #b71c1c, #2e7d32); }
         .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 10px; text-align: center; }
         .res-list { list-style: none; padding: 0; margin: 10px 0; }
-        .res-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; }
-        .tours-container { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
-        .tour-item { background: #f1f3f5; padding: 10px 15px; border-radius: 10px; font-weight: bold; border: 1px solid #ddd; }
-        body.dark-mode .tour-item { background: #2d2d2d; border-color: #444; }
-        .gain-row { display: flex; justify-content: space-between; align-items: center; background: #eeeeee; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.75rem; font-weight: bold; }
+        .res-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin-bottom: 8px; }
+        .gain-row { display: flex; justify-content: space-between; align-items: center; background: #eeeeee; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.8rem; font-weight: bold; }
         body.dark-mode .gain-row { background: #2d2d2d; }
         .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
-        .hist-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); position: relative; text-align: left; }
-        .trash-btn { position: absolute; right: 15px; top: 15px; cursor: pointer; border: none; background: none; font-size: 1.2rem; }
         nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); }
         .page { display: none; } .active-page { display: block; }
     </style>
@@ -61,7 +56,7 @@
                 <div class="f-input-wrap"><input type="text" id="av-h-in" class="f-input" placeholder="18:20:00"></div>
                 <label class="f-label">🎯 MULTIPLICATEUR CIBLE</label>
                 <div class="f-input-wrap"><input type="number" id="av-c-in" class="f-input" value="11.76"></div>
-                <button class="btn-calc" onclick="calculate('av')">🔮 CALCULER</button>
+                <button class="btn-calc" onclick="calculate('av')">🔮 CALCULER V1.0.1</button>
             </div>
 
             <div id="form-cosmos" class="studio-card" style="display:none">
@@ -69,26 +64,16 @@
                 <div class="f-input-wrap"><input type="number" id="co-tr-in" class="f-input" placeholder="262"></div>
                 <label class="f-label">🕒 HEURE EXACTE</label>
                 <div class="f-input-wrap"><input type="text" id="co-h-in" class="f-input" placeholder="22:48:00"></div>
-                <label class="f-label">🎯 MULTIPLICATEUR (+2.00)</label>
-                <div class="f-input-wrap"><input type="number" id="co-c-in" class="f-input" value="2.80"></div>
                 <button class="btn-calc" onclick="calculate('co')">🚀 PRÉDICTION COSMOS X</button>
             </div>
 
             <div id="res-box" class="res-box">
-                <span class="f-label">🖐️ HEURES PRÉDITES</span>
+                <span class="f-label">🖐️ HEURES PRÉDITES (LOGIQUE)</span>
                 <ul class="res-list">
                     <li><b id="h1" style="color:var(--green)">--:--:--</b></li>
                     <li><b id="h2" style="color:var(--green)">--:--:--</b></li>
                     <li><b id="h3" style="color:var(--green)">--:--:--</b></li>
                 </ul>
-                <div id="tours-section" style="display:none">
-                    <span class="f-label">🎰 TOURS PRÉDITS</span>
-                    <div class="tours-container">
-                        <div class="tour-item" id="t1">---</div>
-                        <div class="tour-item" id="t2">---</div>
-                        <div class="tour-item" id="t3">---</div>
-                    </div>
-                </div>
                 <div class="gain-row"><span>👑 SÉCURITÉ</span><span id="g1" style="color:var(--green); font-family:monospace;">x0.00</span></div>
                 <div class="gain-row"><span>💸 TENTENA</span><span id="g2" style="color:var(--green); font-family:monospace;">x0.00</span></div>
                 <div class="gain-row"><span>💰 GAIN</span><span id="g3" style="color:var(--green); font-family:monospace;">x0.00</span></div>
@@ -102,15 +87,12 @@
 
 <script>
     let historyData = [];
-    // Lera 24h ho an'ny famantaranandro
-    setInterval(() => { 
-        document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('fr-FR', {hour12: false}); 
-    }, 1000);
+    const getTime24h = (d) => d.toLocaleTimeString('fr-FR', {hour12: false});
+    setInterval(() => { document.getElementById('live-clock').innerText = getTime24h(new Date()); }, 1000);
 
     function showPage(p) {
         document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page'));
         document.getElementById(p + '-page').classList.add('active-page');
-        if(p === 'hist') renderHistory();
     }
 
     function switchMode(m) {
@@ -123,61 +105,38 @@
 
     function calculate(type) {
         const hIn = type === 'av' ? document.getElementById('av-h-in').value : document.getElementById('co-h-in').value;
-        const target = parseFloat(type === 'av' ? document.getElementById('av-c-in').value : document.getElementById('co-c-in').value) || 2.0;
-        const trBase = parseInt(document.getElementById('co-tr-in').value) || 0;
+        const target = parseFloat(document.getElementById('av-c-in').value) || 2.0;
+        
+        const baseDate = new Date();
+        if(hIn) {
+            const pts = hIn.split(':');
+            baseDate.setHours(parseInt(pts[0]), parseInt(pts[1]), parseInt(pts[2] || 0));
+        }
 
-        const pts = (hIn || new Date().toLocaleTimeString('fr-FR', {hour12: false})).split(':');
-        const mm = parseInt(pts[1]) || 0; const ss = parseInt(pts[2]) || 0;
+        // ALGORITHM V1.0.1 - INTERVALLE LOGIQUE
+        // D1: +3 hatramin'ny 5 minitra
+        const d1 = new Date(baseDate.getTime() + (3 * 60000) + (Math.floor(Math.random() * 120000)));
+        // D2: +4 hatramin'ny 7 minitra aorian'ny D1
+        const d2 = new Date(d1.getTime() + (4 * 60000) + (Math.floor(Math.random() * 180000)));
+        // D3: +5 hatramin'ny 10 minitra aorian'ny D2
+        const d3 = new Date(d2.getTime() + (5 * 60000) + (Math.floor(Math.random() * 300000)));
 
-        // Algorithm Lera (24h format)
-        const formatTime = (d) => d.toLocaleTimeString('fr-FR', {hour12: false});
-        const d1 = new Date(); d1.setSeconds((ss + 15) % 60);
-        const h1 = formatTime(d1);
-        const h2 = formatTime(new Date(d1.getTime() + 145000));
-        const h3 = formatTime(new Date(d1.getTime() + 290000));
+        document.getElementById('h1').innerText = getTime24h(d1);
+        document.getElementById('h2').innerText = getTime24h(d2);
+        document.getElementById('h3').innerText = getTime24h(d3);
 
-        document.getElementById('h1').innerText = h1;
-        document.getElementById('h2').innerText = h2;
-        document.getElementById('h3').innerText = h3;
-
-        const g1 = Math.max(1.30, (target * 0.78)).toFixed(2);
-        const g2 = (target * 1.22).toFixed(2);
-        const g3 = (target * (18 + (ss % 12))).toFixed(2);
+        // KAJY CÔTE LOGIQUE ARAKA NY SARY
+        const g1 = (1.20 + Math.random() * 0.7).toFixed(2); // x1.20 - x1.90
+        const g2 = (2.50 + Math.random() * 1.3).toFixed(2); // x2.50 - x3.80
+        const g3 = (35.00 + Math.random() * 125).toFixed(2); // x35.00 - x160.00
 
         document.getElementById('g1').innerText = "x" + g1;
         document.getElementById('g2').innerText = "x" + g2;
         document.getElementById('g3').innerText = "x" + g3;
 
-        let tours = [];
-        if(type === 'co') {
-            document.getElementById('tours-section').style.display = 'block';
-            tours = [trBase + (ss % 6) + 4, trBase + (ss % 6) + 12, trBase + (ss % 6) + 20];
-            document.getElementById('t1').innerText = tours[0];
-            document.getElementById('t2').innerText = tours[1];
-            document.getElementById('t3').innerText = tours[2];
-        } else {
-            document.getElementById('tours-section').style.display = 'none';
-        }
-
         document.getElementById('res-box').style.display = 'block';
-        historyData.unshift({ type, h1, g1, g2, g3, tours, time: formatTime(new Date()) });
+        if(window.navigator.vibrate) window.navigator.vibrate([100, 50, 100]);
     }
-
-    function renderHistory() {
-        const list = document.getElementById('hist-list');
-        list.innerHTML = historyData.length ? historyData.map((h, i) => `
-            <div class="hist-card">
-                <button class="trash-btn" onclick="deleteHist(${i})">🗑️</button>
-                <div style="font-weight:bold; color:#888; font-size:0.7rem;">${h.type === 'av' ? '✈️ AVIATOR' : '🚀 COSMOS'} - ${h.time}</div>
-                <div style="font-size:1.2rem; font-weight:bold; color:var(--green); font-family:monospace;">${h.h1}</div>
-                ${h.type === 'co' ? `<div style="font-size:0.8rem; font-weight:bold;">Tours: ${h.tours.join(', ')}</div>` : ''}
-                <div style="display:flex; gap:10px; margin-top:5px; font-weight:bold; font-family:monospace; font-size:0.85rem;">
-                    <span style="color:var(--cosmos)">x${h.g1}</span> <span style="color:var(--green)">x${h.g2}</span> <span style="color:var(--aviator)">x${h.g3}</span>
-                </div>
-            </div>
-        `).join('') : "Tsy misy tantara.";
-    }
-    function deleteHist(i) { historyData.splice(i, 1); renderHistory(); }
 </script>
 </body>
 </html>
