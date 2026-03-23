@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - LOGIC FIX V46</title>
+    <title>Mandroka Vola - LOGIC TIME V47</title>
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef; --aviator: #d32f2f; --cosmos: #f39c12; --green: #28a745; --border: #dee2e6; }
         body.dark-mode { --bg: #121212; --card: #1e1e1e; --text: #ffffff; --input-bg: #2d2d2d; --border: #333; }
@@ -127,28 +127,22 @@
             baseDate.setHours(parseInt(pts[0]), parseInt(pts[1]), parseInt(pts[2] || 0));
         }
 
-        // ALGORITHM LERA
-        const d1 = new Date(baseDate.getTime() + (4 * 60000) + (Math.random() * 180000));
-        const d2 = new Date(d1.getTime() + (5 * 60000) + (Math.random() * 240000));
-        const d3 = new Date(d2.getTime() + (6 * 60000) + (Math.random() * 300000));
+        // ALGORITHM LERA (Intervalle voahitsy: 1min, 3min, 4min)
+        const d1 = new Date(baseDate.getTime() + (60000) + (Math.random() * 60000));
+        const d2 = new Date(d1.getTime() + (120000) + (Math.random() * 120000));
+        const d3 = new Date(d2.getTime() + (180000) + (Math.random() * 120000));
 
         const h1 = getTime24h(d1), h2 = getTime24h(d2), h3 = getTime24h(d3);
         document.getElementById('h1').innerText = h1;
         document.getElementById('h2').innerText = h2;
         document.getElementById('h3').innerText = h3;
 
-        // ALGORITHM CÔTE LOGIQUE (HIÉRARCHIE FAIT)
-        // 1. Sécurité (x1.05 - x5.20)
+        // ALGORITHM CÔTE
         const sVal = 1.05 + (Math.random() * 4.15);
         const g1 = sVal.toFixed(2);
-        
-        // 2. Tentena (Tokony ambony noho ny Sécurité foana)
-        // Formula: Sécurité + Target + kely random
-        const tVal = sVal + (target * 0.5) + (Math.random() * 2);
+        const tVal = sVal + (target * 0.4) + (Math.random() * 1.5);
         const g2 = tVal.toFixed(2);
-        
-        // 3. Gain (Izy no avo indrindra)
-        const g3 = (tVal + 40 + (Math.random() * 150)).toFixed(2);
+        const g3 = (tVal + 45 + (Math.random() * 140)).toFixed(2);
 
         document.getElementById('g1').innerText = "x" + g1;
         document.getElementById('g2').innerText = "x" + g2;
@@ -157,7 +151,7 @@
         let tours = [];
         if(type === 'co') {
             document.getElementById('tours-section').style.display = 'block';
-            tours = [trBase + 6, trBase + 14, trBase + 25];
+            tours = [trBase + 5, trBase + 11, trBase + 23];
             document.getElementById('t1').innerText = tours[0];
             document.getElementById('t2').innerText = tours[1];
             document.getElementById('t3').innerText = tours[2];
@@ -177,7 +171,6 @@
                 <button class="trash-btn" onclick="deleteHist(${i})">🗑️</button>
                 <div style="font-weight:bold; color:#888; font-size:0.7rem;">${h.type === 'av' ? '✈️ AVIATOR' : '🚀 COSMOS'} - ${h.time}</div>
                 <div style="font-size:1.2rem; font-weight:bold; color:var(--green); font-family:monospace;">${h.h1}</div>
-                ${h.type === 'co' ? `<div style="font-size:0.8rem; font-weight:bold;">Tours: ${h.tours.join(', ')}</div>` : ''}
                 <div style="display:flex; gap:10px; margin-top:5px; font-weight:bold; font-family:monospace; font-size:0.85rem;">
                     <span style="color:var(--cosmos)">S: x${h.g1}</span> <span style="color:var(--green)">T: x${h.g2}</span> <span style="color:var(--aviator)">G: x${h.g3}</span>
                 </div>
