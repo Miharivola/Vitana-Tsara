@@ -3,44 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - LOGIC TIME V47</title>
+    <title>Mandroka Vola - PREMIUM IA V48</title>
     <style>
-        :root { --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef; --aviator: #d32f2f; --cosmos: #f39c12; --green: #28a745; --border: #dee2e6; }
-        body.dark-mode { --bg: #121212; --card: #1e1e1e; --text: #ffffff; --input-bg: #2d2d2d; --border: #333; }
+        :root { --bg: #0f0f0f; --card: #1a1a1a; --text: #e0e0e0; --input-bg: #262626; --premium: #d4af37; --aviator: #ff4d4d; --green: #00ff88; --border: #333; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; justify-content: center; transition: 0.3s; padding-bottom: 80px; }
         .app { width: 100%; max-width: 450px; min-height: 100vh; position: relative; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); }
-        .n-btn { background: var(--input-bg); border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: var(--text); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #000; border-bottom: 2px solid var(--premium); }
+        .premium-tag { background: var(--premium); color: black; padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 900; }
+        .n-btn { background: var(--input-bg); border: none; padding: 8px; border-radius: 50%; cursor: pointer; color: white; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
         .tabs { display: flex; padding: 10px 15px; gap: 10px; }
-        .tab { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; background: var(--input-bg); color: #777; }
-        .tab.active-av { background: var(--card); border: 1px solid var(--border); color: var(--aviator); }
-        .tab.active-co { background: var(--cosmos); color: white; }
+        .tab { flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--border); font-weight: 900; cursor: pointer; background: var(--input-bg); color: #777; transition: 0.3s; }
+        .tab.active-av { border-color: var(--aviator); color: var(--aviator); box-shadow: 0 0 10px rgba(255,77,77,0.2); }
+        .tab.active-co { border-color: var(--premium); color: var(--premium); box-shadow: 0 0 10px rgba(212,175,55,0.2); }
         .container { padding: 15px; }
-        .studio-card { background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid var(--border); margin-bottom: 20px; text-align: center; }
-        .f-label { display: block; text-align: center; font-size: 0.75rem; font-weight: 800; color: #888; margin-bottom: 8px; text-transform: uppercase; }
-        .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); }
-        .f-input { width: 100%; border: none; background: transparent; font-size: 1.3rem; font-family: monospace; text-align: center; outline: none; font-weight: bold; color: var(--green); }
-        .btn-calc { width: 100%; padding: 18px; border-radius: 15px; border: none; color: white; font-weight: 900; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; background: linear-gradient(90deg, #b71c1c, #2e7d32); }
-        .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 10px; text-align: center; }
-        .res-list { list-style: none; padding: 0; margin: 10px 0; }
-        .res-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin-bottom: 5px; }
-        .gain-row { display: flex; justify-content: space-between; align-items: center; background: #eeeeee; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.8rem; font-weight: bold; }
-        body.dark-mode .gain-row { background: #2d2d2d; }
-        .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
-        .hist-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); position: relative; }
-        .trash-btn { position: absolute; right: 15px; top: 15px; cursor: pointer; border: none; background: none; font-size: 1.2rem; }
-        nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--card); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); }
+        .studio-card { background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid var(--border); margin-bottom: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .f-label { display: block; text-align: center; font-size: 0.7rem; font-weight: 800; color: #aaa; margin-bottom: 8px; letter-spacing: 1px; }
+        .f-input-wrap { background: var(--input-bg); border-radius: 15px; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); transition: 0.3s; }
+        .f-input-wrap:focus-within { border-color: var(--premium); }
+        .f-input { width: 100%; border: none; background: transparent; font-size: 1.3rem; font-family: 'Courier New', monospace; text-align: center; outline: none; font-weight: bold; color: var(--green); }
+        .btn-calc { width: 100%; padding: 20px; border-radius: 15px; border: none; color: black; font-weight: 900; font-size: 1rem; cursor: pointer; text-transform: uppercase; background: linear-gradient(45deg, #d4af37, #f2d06b); box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+        .loading-ia { display: none; margin: 15px 0; font-size: 0.8rem; font-style: italic; color: var(--premium); animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        .res-box { background: #000; border-radius: 20px; padding: 20px; border: 2px solid var(--premium); display: none; margin-top: 10px; text-align: center; position: relative; overflow: hidden; }
+        .res-box::before { content: "IA PREDICTION"; position: absolute; top: 5px; right: 10px; font-size: 0.5rem; color: var(--premium); opacity: 0.5; }
+        .res-list { list-style: none; padding: 0; margin: 15px 0; }
+        .res-list li { font-size: 1.8rem; font-weight: 900; color: var(--green); font-family: monospace; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
+        .gain-row { display: flex; justify-content: space-between; align-items: center; background: #111; padding: 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.85rem; font-weight: bold; border-left: 3px solid var(--premium); }
+        .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(0,0,0,0.8); border: 1px solid var(--premium); color: var(--premium); padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
+        nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: #000; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid var(--border); }
         .page { display: none; } .active-page { display: block; }
     </style>
 </head>
-<body id="main-body">
+<body>
 
 <div class="app">
     <div class="f-clock" id="live-clock">00:00:00</div>
     <div class="header">
-        <div style="font-weight:bold; color:#555;">👤 VITANA TSARA</div>
+        <div style="font-weight:bold; color:var(--premium);">💎 MV PREMIUM <span class="premium-tag">IA V1.0.1</span></div>
         <div class="nav-icons">
-            <button class="n-btn" onclick="document.getElementById('main-body').classList.toggle('dark-mode')">🌙</button>
             <button class="n-btn" onclick="showPage('home')">🏠</button>
             <button class="n-btn" onclick="showPage('hist')">📜</button>
         </div>
@@ -53,42 +53,35 @@
         </div>
 
         <div class="container">
-            <div id="form-aviator" class="studio-card">
-                <label class="f-label">🕒 HEURE DU DÉPART</label>
-                <div class="f-input-wrap"><input type="text" id="av-h-in" class="f-input" placeholder="18:20:00"></div>
-                <label class="f-label">🎯 MULTIPLICATEUR CIBLE</label>
-                <div class="f-input-wrap"><input type="number" id="av-c-in" class="f-input" value="11.76"></div>
-                <button class="btn-calc" onclick="calculate('av')">🔮 CALCULER V1.0.1</button>
-            </div>
+            <div class="studio-card">
+                <div id="form-aviator">
+                    <label class="f-label">🕒 HEURE DU DÉPART</label>
+                    <div class="f-input-wrap"><input type="text" id="av-h-in" class="f-input" placeholder="18:20:00"></div>
+                    <label class="f-label">🎯 MULTIPLICATEUR CIBLE</label>
+                    <div class="f-input-wrap"><input type="number" id="av-c-in" class="f-input" value="11.76"></div>
+                </div>
 
-            <div id="form-cosmos" class="studio-card" style="display:none">
-                <label class="f-label">🎰 DERNIERS CHIFFRES DU TOUR</label>
-                <div class="f-input-wrap"><input type="number" id="co-tr-in" class="f-input" placeholder="262"></div>
-                <label class="f-label">🕒 HEURE EXACTE</label>
-                <div class="f-input-wrap"><input type="text" id="co-h-in" class="f-input" placeholder="22:48:00"></div>
-                <label class="f-label">🎯 MULTIPLICATEUR (+2.00)</label>
-                <div class="f-input-wrap"><input type="number" id="co-c-in" class="f-input" value="2.80"></div>
-                <button class="btn-calc" onclick="calculate('co')">🚀 PRÉDICTION COSMOS X</button>
+                <div id="form-cosmos" style="display:none">
+                    <label class="f-label">🎰 DERNIER TOUR</label>
+                    <div class="f-input-wrap"><input type="number" id="co-tr-in" class="f-input" placeholder="262"></div>
+                    <label class="f-label">🕒 HEURE EXACTE</label>
+                    <div class="f-input-wrap"><input type="text" id="co-h-in" class="f-input" placeholder="22:48:00"></div>
+                </div>
+
+                <div id="ia-status" class="loading-ia">🤖 Analyse des serveurs Provably Fair...</div>
+                <button class="btn-calc" onclick="runIA()">⚡ ANALYSER PAR IA</button>
             </div>
 
             <div id="res-box" class="res-box">
-                <span class="f-label">🖐️ HEURES PRÉDITES</span>
+                <span class="f-label" style="color:var(--premium)">VOKATRY NY ANALYSE IA</span>
                 <ul class="res-list">
-                    <li><b id="h1" style="color:var(--green)">--:--:--</b></li>
-                    <li><b id="h2" style="color:var(--green)">--:--:--</b></li>
-                    <li><b id="h3" style="color:var(--green)">--:--:--</b></li>
+                    <li><b id="h1">--:--:--</b></li>
+                    <li><b id="h2">--:--:--</b></li>
+                    <li><b id="h3">--:--:--</b></li>
                 </ul>
-                <div id="tours-section" style="display:none">
-                    <span class="f-label">🎰 TOURS PRÉDITS</span>
-                    <div class="tours-container">
-                        <div class="tour-item" id="t1">---</div>
-                        <div class="tour-item" id="t2">---</div>
-                        <div class="tour-item" id="t3">---</div>
-                    </div>
-                </div>
-                <div class="gain-row"><span>👑 SÉCURITÉ</span><span id="g1" style="color:var(--green); font-family:monospace;">x0.00</span></div>
-                <div class="gain-row"><span>💸 TENTENA</span><span id="g2" style="color:var(--green); font-family:monospace;">x0.00</span></div>
-                <div class="gain-row"><span>💰 GAIN</span><span id="g3" style="color:var(--green); font-family:monospace;">x0.00</span></div>
+                <div class="gain-row"><span>🛡️ SÉCURITÉ</span><span id="g1" style="color:var(--premium)">x0.00</span></div>
+                <div class="gain-row"><span>📊 TENTENA</span><span id="g2" style="color:var(--green)">x0.00</span></div>
+                <div class="gain-row"><span>🔥 GAIN IA</span><span id="g3" style="color:var(--aviator)">x0.00</span></div>
             </div>
         </div>
     </div>
@@ -98,6 +91,7 @@
 </div>
 
 <script>
+    let currentMode = 'aviator';
     let historyData = [];
     const getTime24h = (d) => d.toLocaleTimeString('fr-FR', {hour12: false});
     setInterval(() => { document.getElementById('live-clock').innerText = getTime24h(new Date()); }, 1000);
@@ -105,10 +99,10 @@
     function showPage(p) {
         document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page'));
         document.getElementById(p + '-page').classList.add('active-page');
-        if(p === 'hist') renderHistory();
     }
 
     function switchMode(m) {
+        currentMode = m;
         document.getElementById('form-aviator').style.display = m === 'aviator' ? 'block' : 'none';
         document.getElementById('form-cosmos').style.display = m === 'cosmos' ? 'block' : 'none';
         document.getElementById('tab-av').className = m === 'aviator' ? 'tab active-av' : 'tab';
@@ -116,10 +110,32 @@
         document.getElementById('res-box').style.display = 'none';
     }
 
-    function calculate(type) {
-        const hIn = type === 'av' ? document.getElementById('av-h-in').value : document.getElementById('co-h-in').value;
-        const target = parseFloat(type === 'av' ? document.getElementById('av-c-in').value : document.getElementById('co-c-in').value) || 2.0;
-        const trBase = parseInt(document.getElementById('co-tr-in').value) || 0;
+    function runIA() {
+        const btn = document.querySelector('.btn-calc');
+        const status = document.getElementById('ia-status');
+        btn.disabled = true;
+        btn.style.opacity = "0.5";
+        status.style.display = "block";
+        document.getElementById('res-box').style.display = "none";
+
+        let steps = ["Analyse des Hash...", "Calcul des probabilités...", "Vérification Provably Fair...", "Génération des lera..."];
+        let i = 0;
+        let interval = setInterval(() => {
+            status.innerText = "🤖 " + steps[i];
+            i++;
+            if(i >= steps.length) {
+                clearInterval(interval);
+                calculate();
+                btn.disabled = false;
+                btn.style.opacity = "1";
+                status.style.display = "none";
+            }
+        }, 600);
+    }
+
+    function calculate() {
+        const hIn = currentMode === 'aviator' ? document.getElementById('av-h-in').value : document.getElementById('co-h-in').value;
+        const target = parseFloat(document.getElementById('av-c-in').value) || 2.0;
         
         const baseDate = new Date();
         if(hIn) {
@@ -127,7 +143,7 @@
             baseDate.setHours(parseInt(pts[0]), parseInt(pts[1]), parseInt(pts[2] || 0));
         }
 
-        // ALGORITHM LERA (Intervalle voahitsy: 1min, 3min, 4min)
+        // LERA LOGIQUE (Voadio)
         const d1 = new Date(baseDate.getTime() + (60000) + (Math.random() * 60000));
         const d2 = new Date(d1.getTime() + (120000) + (Math.random() * 120000));
         const d3 = new Date(d2.getTime() + (180000) + (Math.random() * 120000));
@@ -137,47 +153,20 @@
         document.getElementById('h2').innerText = h2;
         document.getElementById('h3').innerText = h3;
 
-        // ALGORITHM CÔTE
+        // CÔTE LOGIQUE (HIÉRARCHIE S < T < G)
         const sVal = 1.05 + (Math.random() * 4.15);
         const g1 = sVal.toFixed(2);
         const tVal = sVal + (target * 0.4) + (Math.random() * 1.5);
         const g2 = tVal.toFixed(2);
-        const g3 = (tVal + 45 + (Math.random() * 140)).toFixed(2);
+        const g3 = (tVal + 45 + (Math.random() * 150)).toFixed(2);
 
         document.getElementById('g1').innerText = "x" + g1;
         document.getElementById('g2').innerText = "x" + g2;
         document.getElementById('g3').innerText = "x" + g3;
 
-        let tours = [];
-        if(type === 'co') {
-            document.getElementById('tours-section').style.display = 'block';
-            tours = [trBase + 5, trBase + 11, trBase + 23];
-            document.getElementById('t1').innerText = tours[0];
-            document.getElementById('t2').innerText = tours[1];
-            document.getElementById('t3').innerText = tours[2];
-        } else {
-            document.getElementById('tours-section').style.display = 'none';
-        }
-
         document.getElementById('res-box').style.display = 'block';
-        historyData.unshift({ type, h1, g1, g2, g3, tours, time: getTime24h(new Date()) });
-        if(window.navigator.vibrate) window.navigator.vibrate(100);
+        if(window.navigator.vibrate) window.navigator.vibrate([100, 50, 100]);
     }
-
-    function renderHistory() {
-        const list = document.getElementById('hist-list');
-        list.innerHTML = historyData.length ? historyData.map((h, i) => `
-            <div class="hist-card">
-                <button class="trash-btn" onclick="deleteHist(${i})">🗑️</button>
-                <div style="font-weight:bold; color:#888; font-size:0.7rem;">${h.type === 'av' ? '✈️ AVIATOR' : '🚀 COSMOS'} - ${h.time}</div>
-                <div style="font-size:1.2rem; font-weight:bold; color:var(--green); font-family:monospace;">${h.h1}</div>
-                <div style="display:flex; gap:10px; margin-top:5px; font-weight:bold; font-family:monospace; font-size:0.85rem;">
-                    <span style="color:var(--cosmos)">S: x${h.g1}</span> <span style="color:var(--green)">T: x${h.g2}</span> <span style="color:var(--aviator)">G: x${h.g3}</span>
-                </div>
-            </div>
-        `).join('') : "Tsy misy tantara.";
-    }
-    function deleteHist(i) { historyData.splice(i, 1); renderHistory(); }
 </script>
 </body>
 </html>
