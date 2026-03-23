@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandroka Vola - ALGO PRO V45</title>
+    <title>Mandroka Vola - LOGIC FIX V46</title>
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --text: #333; --input-bg: #e9ecef; --aviator: #d32f2f; --cosmos: #f39c12; --green: #28a745; --border: #dee2e6; }
         body.dark-mode { --bg: #121212; --card: #1e1e1e; --text: #ffffff; --input-bg: #2d2d2d; --border: #333; }
@@ -24,9 +24,6 @@
         .res-box { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid var(--border); display: none; margin-top: 10px; text-align: center; }
         .res-list { list-style: none; padding: 0; margin: 10px 0; }
         .res-list li { font-size: 1.6rem; font-weight: 900; color: var(--green); font-family: monospace; margin-bottom: 5px; }
-        .tours-container { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
-        .tour-item { background: #f1f3f5; padding: 10px 15px; border-radius: 10px; font-weight: bold; border: 1px solid #ddd; color: var(--green); }
-        body.dark-mode .tour-item { background: #2d2d2d; border-color: #444; }
         .gain-row { display: flex; justify-content: space-between; align-items: center; background: #eeeeee; padding: 12px 15px; border-radius: 12px; margin-bottom: 8px; font-size: 0.8rem; font-weight: bold; }
         body.dark-mode .gain-row { background: #2d2d2d; }
         .f-clock { position: fixed; top: 110px; left: 15px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; padding: 6px 12px; border-radius: 8px; font-family: monospace; font-weight: bold; z-index: 1000; }
@@ -130,7 +127,7 @@
             baseDate.setHours(parseInt(pts[0]), parseInt(pts[1]), parseInt(pts[2] || 0));
         }
 
-        // 1. ALGORITHM LERA (Intervalle lojika 4-12 min)
+        // ALGORITHM LERA
         const d1 = new Date(baseDate.getTime() + (4 * 60000) + (Math.random() * 180000));
         const d2 = new Date(d1.getTime() + (5 * 60000) + (Math.random() * 240000));
         const d3 = new Date(d2.getTime() + (6 * 60000) + (Math.random() * 300000));
@@ -140,21 +137,23 @@
         document.getElementById('h2').innerText = h2;
         document.getElementById('h3').innerText = h3;
 
-        // 2. ALGORITHM CÔTE DYNAMIQUE (ARAHO TSARA ITY)
-        // Sécurité: x1.05 hatramin'ny x5.20 (tsy miraikitra amin'ny 1.36 intsony)
-        const g1 = (1.05 + (Math.random() * 4.15)).toFixed(2);
+        // ALGORITHM CÔTE LOGIQUE (HIÉRARCHIE FAIT)
+        // 1. Sécurité (x1.05 - x5.20)
+        const sVal = 1.05 + (Math.random() * 4.15);
+        const g1 = sVal.toFixed(2);
         
-        // Tentena: Manodidina ny target (target +/- 20%)
-        const g2 = (target * (0.85 + (Math.random() * 0.4))).toFixed(2);
+        // 2. Tentena (Tokony ambony noho ny Sécurité foana)
+        // Formula: Sécurité + Target + kely random
+        const tVal = sVal + (target * 0.5) + (Math.random() * 2);
+        const g2 = tVal.toFixed(2);
         
-        // Gain: Manomboka amin'ny x40 hatramin'ny x210 (Logique ambony)
-        const g3 = (40 + (Math.random() * 170)).toFixed(2);
+        // 3. Gain (Izy no avo indrindra)
+        const g3 = (tVal + 40 + (Math.random() * 150)).toFixed(2);
 
         document.getElementById('g1').innerText = "x" + g1;
         document.getElementById('g2').innerText = "x" + g2;
         document.getElementById('g3').innerText = "x" + g3;
 
-        // 3. TOURS (COSMOS X)
         let tours = [];
         if(type === 'co') {
             document.getElementById('tours-section').style.display = 'block';
